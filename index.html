@@ -1,0 +1,3432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catatan Struktur Data</title>
+
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      display:flex;
+      background:#0f172a;
+      color:white;
+    }
+
+    .sidebar{
+      width:260px;
+      height:100vh;
+      background:#111827;
+      position:fixed;
+      padding:20px;
+      overflow:auto;
+      border-right:1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo{
+      text-align:center;
+      margin-bottom:30px;
+    }
+
+    .logo i{
+      font-size:50px;
+      color:#38bdf8;
+    }
+
+    .logo h2{
+      color:#38bdf8;
+      margin-top:10px;
+    }
+
+    .profil{
+      background:#1e293b;
+      padding:15px;
+      border-radius:15px;
+      margin-bottom:30px;
+      text-align:center;
+    }
+
+    .profil h3{
+      font-size:18px;
+      margin-bottom:5px;
+      color:#38bdf8;
+    }
+
+    .profil p{
+      font-size:14px;
+    }
+
+    .sidebar ul{
+      list-style:none;
+    }
+
+    .sidebar ul li{
+      margin:15px 0;
+    }
+
+    .sidebar ul li a{
+      text-decoration:none;
+      color:white;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px;
+      border-radius:10px;
+      transition:0.3s;
+    }
+
+    .sidebar ul li a:hover{
+      background:#38bdf8;
+      transform:translateX(5px);
+    }
+
+    .main{
+      margin-left:260px;
+      width:100%;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:60px;
+    }
+
+    .hero-content{
+      max-width:800px;
+    }
+
+    .hero h1{
+      font-size:60px;
+      margin-bottom:20px;
+      line-height:80px;
+    }
+
+    .hero h1 span{
+      color:#38bdf8;
+    }
+
+    .hero p{
+      line-height:35px;
+      font-size:18px;
+      margin-bottom:30px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:15px 35px;
+      background:#38bdf8;
+      color:white;
+      text-decoration:none;
+      border-radius:12px;
+      transition:0.3s;
+      font-weight:600;
+    }
+
+    .btn:hover{
+      transform:scale(1.05);
+      box-shadow:0 0 20px rgba(56,189,248,0.5);
+    }
+
+    section{
+      padding:70px 50px;
+    }
+
+    .title{
+      font-size:45px;
+      margin-bottom:40px;
+      color:#38bdf8;
+    }
+
+    .card-container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:25px;
+    }
+
+    .card{
+      background:#1e293b;
+      padding:30px;
+      border-radius:20px;
+      transition:0.3s;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 0 25px rgba(56,189,248,0.4);
+    }
+
+    .card i{
+      font-size:55px;
+      color:#38bdf8;
+      margin-bottom:20px;
+    }
+
+    .card h2{
+      margin-bottom:15px;
+    }
+
+    .card p{
+      line-height:30px;
+      margin-bottom:20px;
+    }
+
+    .materi-box{
+      background:#1e293b;
+      padding:35px;
+      border-radius:20px;
+      margin-bottom:40px;
+      line-height:35px;
+    }
+
+    .materi-box h2{
+      color:#38bdf8;
+      margin-bottom:20px;
+    }
+
+    pre{
+      background:#0f172a;
+      padding:20px;
+      border-radius:15px;
+      overflow:auto;
+      margin-top:20px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    code{
+      color:#38bdf8;
+    }
+
+    ul{
+      margin-left:20px;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      background:#111827;
+      margin-top:50px;
+      border-top:1px solid rgba(255,255,255,0.1);
+    }
+
+    ::-webkit-scrollbar{
+      width:10px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#38bdf8;
+      border-radius:10px;
+    }
+
+    @media(max-width:900px){
+
+      .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+      }
+
+      body{
+        display:block;
+      }
+
+      .main{
+        margin-left:0;
+      }
+
+      .hero h1{
+        font-size:40px;
+        line-height:60px;
+      }
+
+    }
+
+  </style>
+
+</head>
+<body>
+
+<div class="sidebar">
+
+  <div class="logo">
+    <i class='bx bx-code-alt'></i>
+    <h2>StrukDat</h2>
+  </div>
+
+  <div class="profil">
+    <h3>Adhitya Firmanyah</h3>
+    <p>NIM : 250411100017</p>
+  </div>
+
+  <ul>
+    <li><a href="#home"><i class='bx bx-home'></i> Home</a></li>
+    <li><a href="#stack"><i class='bx bx-layer'></i> Stack</a></li>
+    <li><a href="#queue"><i class='bx bx-transfer'></i> Queue</a></li>
+    <li><a href="#linkedlist"><i class='bx bx-link'></i> Linked List</a></li>
+    <li><a href="#hashing"><i class='bx bx-hash'></i> Hashing</a></li>
+    <li><a href="#tree"><i class='bx bx-git-branch'></i> Tree</a></li>
+    <li><a href="#bubble"><i class='bx bx-sort'></i> Bubble Sort</a></li>
+    <li><a href="#selection"><i class='bx bx-sort-alt-2'></i> Selection Sort</a></li>
+    <li><a href="#insertion"><i class='bx bx-sort-up'></i> Insertion Sort</a></li>
+    <li><a href="#counting"><i class='bx bx-calculator'></i> Counting Sort</a></li>
+    <li><a href="#merge"><i class='bx bx-git-merge'></i> Merge Sort</a></li>
+    <li><a href="#quick"><i class='bx bx-flash'></i> Quick Sort</a></li>
+    <li><a href="#search"><i class='bx bx-search'></i> Searching</a></li>
+    <li><a href="#rekursif"><i class='bx bx-refresh'></i> Rekursif</a></li>
+    <li><a href="#parsing"><i class='bx bx-sitemap'></i> Parsing Binary Tree</a></li>
+    <li><a href="#tugas1"><i class='bx bx-task'></i> Tugas 1</a></li>
+  </ul>
+
+</div>
+
+<div class="main">
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <h1>
+        Website <span>Struktur Data</span>
+      </h1>
+
+      <p>
+        Website pembelajaran struktur data.
+        Berisi materi Stack, Queue, Linked List, Hashing, dan Tree lengkap dengan contoh program.
+      </p>
+
+      <a href="#stack" class="btn">
+        Mulai Belajar
+      </a>
+
+    </div>
+
+  </section>
+
+  <section>
+
+    <h1 class="title">Daftar Materi</h1>
+
+    <div class="card-container">
+
+      <div class="card">
+        <i class='bx bx-layer'></i>
+        <h2>Stack</h2>
+        <p>
+          Struktur data dengan konsep LIFO.
+        </p>
+      </div>
+
+      <div class="card">
+        <i class='bx bx-transfer'></i>
+        <h2>Queue</h2>
+        <p>
+          Struktur data dengan konsep FIFO.
+        </p>
+      </div>
+
+      <div class="card">
+        <i class='bx bx-link'></i>
+        <h2>Linked List</h2>
+        <p>
+          Struktur data berbasis node dan pointer.
+        </p>
+      </div>
+
+      <div class="card">
+        <i class='bx bx-hash'></i>
+        <h2>Hashing</h2>
+        <p>
+          Teknik pencarian data cepat menggunakan hash table.
+        </p>
+      </div>
+
+      <div class="card">
+        <i class='bx bx-git-branch'></i>
+        <h2>Tree</h2>
+        <p>
+          Struktur data berbentuk pohon atau hierarki.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="stack">
+
+    <h1 class="title">Materi Stack</h1>
+
+    <div class="materi-box">
+
+      <h2>Definisi Stack</h2>
+
+      <p>
+        Sebuah kumpulan item berurutan di mana penambahan item baru dan penghapusan item yang sudah ada selalu terjadi pada ujung yang sama. Ujung ini umumnya disebut sebagai “puncak” (top). Ujung yang berlawanan dengan puncak dikenal sebagai “dasar” (base). Prinsip pengurutan ini terkadang disebut LIFO (Last-In, First-Out / Terakhir Masuk, Pertama Keluar) atau FILO (First-In, Last-Out / Pertama Masuk, Terakhir Keluar).
+      </p>
+
+      <h2>Prinsip LIFO (Last In First Out)</h2>
+
+      <p>
+        Prinsip LIFO berarti elemen yang paling akhir ditambahkan ke dalam stack adalah elemen pertama yang akan dihapus atau diambil.
+      </p>
+
+      <ul>
+        <li>Elemen baru selalu ditambahkan (didorong/pushed) ke posisi paling atas.</li>
+        <li>Penghapusan (pop) juga hanya terjadi dari posisi atas.</li>
+        <li>Aturan ini memastikan urutan yang ketat : terakhir masuk -> pertama keluar</li>
+      </ul>
+
+      <br>
+
+      <h2>Operasi Basic Pada Stack</h2>
+
+      <ul>
+        <li>Stack() : membuat sebuah stack (tumpukan) baru yang kosong. Operasi ini tidak membutuhkan parameter dan mengembalikan sebuah stack yang kosong.</li>
+        <li>Push(): Menambahkan elemen baru ke atas stack.</li>
+        <li>Pop(): Menghapus dan mengembalikan elemen teratas dari stack.</li>
+        <li>Peek(): Mengembalikan (melihat) elemen teratas (terakhir) pada stack.</li>
+        <li>isEmpty(): Memeriksa apakah stack tersebut kosong.</li>
+        <li>Size(): Mengetahui jumlah elemen di dalam stack.</li>
+      </ul>
+
+      <h2>CONTOH CODE</h2>
+
+      <pre>
+<code>
+def stack():
+    s = []
+    return (s)
+def push(s,data):
+    s.append(data)
+def pop(s):
+    data = s.pop()
+    return (data)
+def peek(s):
+    return (s[len(s)-1])
+def isEmpty(s):
+    return (s==[])
+def size(s):
+    return (len(s))
+</code>
+      </pre>
+
+      <h2>Contoh code stack dengan class</h2>
+
+      <pre>
+<code>
+    class Stack:
+
+    def __init__(self):
+        self.items = []
+    def isEmpty(self):
+        return self.items == []
+    def push(self, item):
+        self.items.append(item)
+    def pop(self):
+        return self.items.pop()
+    def peek(self):
+        return self.items[len(self.items)-1]
+    def size(self):
+        return len(self.items)
+</code>
+      </pre>
+
+      <p>
+        Struktur data direpresentasikan dengan lists.
+      </p>
+
+      <p>
+        Posisi top dari suatu stacks berada pada posisi terakhir pada list, oleh karena itu, operasi push pada stack, menggunakan method append dari list, sehingga dengan operasi 8append* ini, penambahan data baru terletak pada posisi akhir pada list.
+      </p>
+
+      <p>
+        Misalkan terdapat variabel dataStack yang menggunakan stacks berisikan data
+        dataStack = [4,8,1,0]
+      </p>
+
+      <p>
+        maka posisi top berada pada 0. Sehingga ketika dilakukan push(dataStack, 72), maka dataStack akan berubah menjadi
+        dataStack = [4,8,1,72].
+      </p>
+
+      <p>
+        Sedangkan operasi pop pada list, menggunakan method pop dari list, karena method pop ini menghapus data yang terletak pada posisi akhir dari list.
+      </p>
+
+      <h2>Contoh Penggunaan Operasi Stack</h2>
+
+      <pre>
+<code>
+data = stack()
+push(data,50)
+push(data,60)
+pop(data)
+push(data,40)
+print(data)
+
+[50, 40]
+</code>
+      </pre>
+
+      <pre>
+<code>
+nama = stack()
+push(nama,'i')
+print(peek(nama))
+push(nama,'d')
+push(nama,'h')
+pop(nama)
+push(nama,'h')
+print(peek(nama))
+push(nama,'a')
+push(nama,'m')
+
+print('Ukuran :',size(nama))
+temp = ''
+while not (isEmpty(nama)):
+    temp = pop(nama) + temp
+
+print(temp)
+
+i
+h
+Ukuran : 5
+idham
+</code>
+      </pre>
+
+      <p>
+        Berikut adalah contoh penggunaan fungsi-fungsi stacks yang telah dibuat.
+      </p>
+
+      <pre>
+<code>
+data = stack()
+isEmpty(data)
+
+True
+</code>
+      </pre>
+
+      <pre>
+<code>
+push(data,100)
+push(data,23)
+push(data,34)
+push(data,190)
+pop(data)
+push(data,56)
+pop(data)
+print(data)
+
+[100, 23, 34]
+</code>
+      </pre>
+
+      <h2>Soal Latihan</h2>
+
+      <p>
+        5️⃣Diketahui stack kosong. Lakukan:
+      </p>
+
+      <p>
+        Push(A)
+
+        Push(B)
+
+        Push(C)
+
+        Pop()
+
+        Pop()
+
+        Push(D)
+      </p>
+
+      <p>
+        Tentukan isi stack akhir!
+      </p>
+
+      <pre>
+<code>
+huruf = stack()
+push(huruf,"A")
+push(huruf,"B")
+push(huruf,"C")
+pop(huruf)
+pop(huruf)
+push(huruf,"D")
+print(huruf)
+
+['A', 'D']
+</code>
+      </pre>
+
+      <p>
+        6️⃣ Diketahui stack kosong. Lakukan operasi berikut:
+      </p>
+
+      <p>
+        Push(10)
+
+        Push(15)
+
+        Push(20)
+
+        Pop()
+
+        Push(25)
+      </p>
+
+      <p>
+        Tentukan isi stack akhir!
+      </p>
+
+      <pre>
+<code>
+angka = stack()
+push(angka,10)
+push(angka,15)
+push(angka,20)
+pop(angka)
+push(angka,25)
+print(angka)
+
+[10, 15, 25]
+</code>
+      </pre>
+
+      <p>
+        7️⃣Buatlah fungsi untuk mengecek apakah suatu string merupakan palindrome menggunakan stack.
+      </p>
+
+      <p>
+        Input: "KATAK"
+      </p>
+
+      <p>
+        Output: Palindrome
+      </p>
+
+      <pre>
+<code>
+    def cekPalindrome(kata) :
+    cek = stack()
+    for huruf in kata :
+        push(cek,huruf)
+    wadah = ''
+    while not(isEmpty(cek)) :
+        wadah = wadah + pop(cek)
+    if wadah==kata:
+        return "Palindrome"
+    else:
+        return "Bukan palindrome"
+</code>
+      </pre>
+
+      <pre>
+<code>
+print(cekPalindrome("KATAK"))
+print(cekPalindrome("JAMUR"))
+
+Palindrome
+Bukan palindrome
+</code>
+      </pre>
+
+      <h2>Ekspresi Infix, Prefix , dan Postfix</h2>
+
+      <h2>Definisi</h2>
+
+      <p>
+        Dalam dunia struktur data dan pemrograman, infix, prefix, dan postfix adalah tiga cara berbeda untuk menuliskan ekspresi matematika. Perbedaannya terletak pada letak operator (seperti +, - , x , / terhadap operan (angka atau variabel).
+
+        Maka Operasi perhitungannya mengikuti level dari precedence tersebut.
+
+        A + B * C + D = ((A + (B * C)) + D) 🡪 operator * lebih didahulukan daripada operator *, dan operator + yang pertama juga didahulukan daripada yang kedua (kiri ke kanan)
+
+        Jadi prinsip Precedence level adalah : Highest Precedence and Left to Right
+      </p>
+
+      <h2>1.Infix (Notasi Umum)</h2>
+
+      <p>
+        Infix adalah notasi yang paling sering kita gunakan dalam kehidupan sehari-hari. Pada notasi ini, operator diletakkan di tengah antara dua operan. Format: Operan1 [Operator] Operan2 Karakteristik: Memerlukan tanda kurung () dan aturan derajat operator (pangkat, kali/bagi, tambah/kurang) untuk menentukan urutan pengerjaan. Contoh: A + B atau (A + B) * C
+      </p>
+
+      <h2>2. Prefix (Polish Notation)</h2>
+
+      <p>
+        Prefix adalah notasi di mana operator diletakkan di depan sebelum operan. Notasi ini diciptakan oleh Jan Łukasiewicz untuk menghilangkan kebutuhan akan tanda kurung. Format: [Operator] Operan1 Operan2Karakteristik: Komputer membaca dari kanan ke kiri untuk mengevaluasi ekspresi ini. Tidak butuh tanda kurung karena urutan operasinya sudah tetap.Contoh: + A B (artinya sama dengan A+B)
+      </p>
+
+      <h2>3. Postfix (Reverse Polish Notation / RPN)</h2>
+
+      <p>
+        Postfix adalah kebalikan dari prefix, di mana operator diletakkan di belakang setelah operan. Ini adalah format yang paling disukai oleh mesin/komputer (menggunakan struktur data Stack) karena sangat efisien untuk diproses. Format: Operan1 Operan2 [Operator]Karakteristik: Komputer membaca dari kiri ke kanan. Tidak membutuhkan tanda kurung atau aturan prioritas operator yang rumit saat diproses oleh mesin.Contoh: A B + (artinya sama dengan A+B)
+      </p>
+
+      <h2>Algoritma Evaluasi & Konversi</h2>
+
+      <h2>Infix ke Postfix:</h2>
+
+      <ul>
+        <li>Scan ekspresi dari kiri ke kanan.</li>
+        <li>Jika operan, masukkan ke daftar output.</li>
+        <li>Jika operator, bandingkan prioritasnya dengan yang ada di stack. Hapus operator di stack yang memiliki prioritas lebih tinggi/sama dan masukkan ke output, lalu masukkan operator baru ke stack.</li>
+      </ul>
+
+      <h2>Infix ke Prefix:</h2>
+
+      <ul>
+        <li>Balikkan ekspresi infix (tanda kurung juga dibalik).</li>
+        <li>Ubah ekspresi yang sudah dibalik tersebut menjadi postfix.</li>
+        <li>Balikkan kembali hasil postfix tersebut untuk mendapatkan hasil prefix.</li>
+      </ul>
+
+      <h2>Evaluasi Postfix:</h2>
+
+      <ul>
+        <li>Scan dari kiri ke kanan.</li>
+        <li>Jika operan, masukkan ke stack.</li>
+        <li>Jika operator, ambil (pop) dua operan dari stack, hitung hasilnya, dan masukkan kembali ke stack.</li>
+      </ul>
+
+      <h2>Infix to Postfix</h2>
+
+      <pre>
+<code>
+def prec(c):
+    if c == '^':
+        return 3
+    elif c == '/' or c == '*':
+        return 2
+    elif c == '+' or c == '-':
+        return 1
+    else:
+        return -1
+
+def isRightAssociative(c):
+    return c == '^'
+
+def infixToPostfix(s):
+    st = []
+    res = []
+
+    for c in s:
+        # If operand, add to result
+        if ('a' <= c <= 'z') or ('A' <= c <= 'Z') or ('0' <= c <= '9'):
+            res.append(c)
+
+        # If '(', push to stack
+        elif c == '(':
+            st.append('(')
+
+        # If ')', pop until '('
+        elif c == ')':
+            while st and st[-1] != '(':
+                res.append(st.pop())
+            st.pop()
+
+        # If operator
+        else:
+            while st and st[-1] != '(' and \
+                (prec(st[-1]) > prec(c) or (prec(st[-1]) == prec(c) \
+                                    and not isRightAssociative(c))):
+                res.append(st.pop())
+            st.append(c)
+
+    # Pop remaining operators
+    while st:
+        res.append(st.pop())
+
+    return ''.join(res)
+
+if __name__ == '__main__':
+    exp = "(a+b*c)"
+    print(infixToPostfix(exp))
+
+    abc*+
+</code>
+      </pre>
+
+      <h2>Infix to Prefix</h2>
+
+      <pre>
+<code>
+# function to return precedence of operators
+def precedence(c):
+    if c == '^':
+        return 3
+    elif c in ('*', '/'):
+        return 2
+    elif c in ('+', '-'):
+        return 1
+    else:
+        return -1
+
+# function to check if operator is right-associative
+def isRightAssociative(c):
+    return c == '^'
+
+# function to check if a character is an operator
+def isOperator(c):
+    return c in "+-*/^"
+
+# function to convert infix expression to prefix
+def infixToPrefix(s):
+    st = []
+    result = []
+
+    # scan from right to left
+    for c in reversed(s):
+        if c.isalnum():
+            result.append(c)
+        elif c == ')':
+            st.append(c)
+        elif c == '(':
+            while st and st[-1] != ')':
+                result.append(st.pop())
+            if st:
+                st.pop()  # remove ')'
+        elif isOperator(c):
+            while (st and isOperator(st[-1]) and
+                  (precedence(st[-1]) > precedence(c) or
+                  (precedence(st[-1]) == precedence(c) and isRightAssociative(c)))):
+                result.append(st.pop())
+            st.append(c)
+
+    # pop remaining operators
+    while st:
+        result.append(st.pop())
+
+    # reverse at the end to get correct prefix
+    return ''.join(reversed(result))
+
+if __name__ == "__main__":
+    s = "(/+78+32)"
+    print(infixToPrefix(s))
+
+    ++/7832
+</code>
+      </pre>
+
+      <h2>Prefix to infix</h2>
+
+      <pre>
+<code>
+# Python Program to convert prefix to Infix
+def prefixToInfix(prefix):
+    stack = []
+    # read prefix in reverse order
+    i = len(prefix) - 1
+    while i >= 0:
+        if not isOperator(prefix[i]):
+
+            # symbol is operand
+            stack.append(prefix[i])
+            i -= 1
+        else:
+
+            # symbol is operator
+            str = "(" + stack.pop() + prefix[i] + stack.pop() + ")"
+            stack.append(str)
+            i -= 1
+
+    return stack.pop()
+
+def isOperator(c):
+    if c == "*" or c == "+" or c == "-" or c == "/" or c == "^" or c == "(" or c == ")":
+        return True
+    else:
+        return False
+
+# Driver code
+if __name__=="__main__":
+    str = "+A*BC"
+    print(prefixToInfix(str))
+
+    (A+(B*C))
+</code>
+      </pre>
+
+      <h2>Postfix to Infix</h2>
+
+      <pre>
+<code>
+def isOperand(x):
+    return x.isalnum()
+
+# Get Infix for a given postfix
+# expression
+def getInfix(exp) :
+
+    s = []
+
+    for i in exp:
+        # Push operands
+        if (isOperand(i)) :
+            s.insert(0, i)
+
+        # We assume that input is a
+        # valid postfix and expect
+        # an operator.
+        else:
+
+            op1 = s[0]
+            s.pop(0)
+            op2 = s[0]
+            s.pop(0)
+            s.insert(0, "(" + op2 + i +
+                             op1 + ")")
+
+    # There must be a single element in
+    # stack now which is the required
+    # infix.
+    return s[0]
+
+# Driver Code
+if __name__ == '__main__':
+
+    exp = "456*+"
+    print(getInfix(exp.strip()))
+
+# This code is contributed by
+# Shubham Singh(SHUBHAMSINGH10)
+
+(4+(5*6))
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="queue">
+
+    <h1 class="title">Materi Queue</h1>
+
+    <div class="materi-box">
+
+      <h2>DEFINISI QUEUE</h2>
+
+      <p>
+        Sebuah kumpulan item berurutan di mana penambahan item baru terjadi pada satu ujung, yang disebut “belakang” (rear), dan penghapusan item yang sudah ada terjadi pada ujung lainnya, yang umumnya disebut “depan” (front). Prinsip pengurutan ini terkadang disebut FIFO, first-in first-out (pertama masuk, pertama keluar). Ini juga dikenal sebagai prinsip “pertama datang, pertama dilayani” (first-come first-served).
+      </p>
+
+      <h2>Oprasi dalam Queue</h2>
+
+      <ul>
+        <li>Queue(): Membuat sebuah queue (antrean) baru yang kosong. Operasi ini tidak membutuhkan parameter dan akan mengembalikan sebuah antrean kosong.</li>
+        <li>enqueue(item): Menambahkan sebuah item baru ke bagian belakang (rear) antrean. Operasi ini membutuhkan parameter berupa item yang akan dimasukkan dan tidak mengembalikan nilai apa pun.</li>
+        <li>dequeue(): Menghapus item terdepan (front) dari antrean. Operasi ini tidak membutuhkan parameter dan akan mengembalikan item yang dihapus tersebut. Struktur antrean akan berubah (termodifikasi).</li>
+        <li>isEmpty(): Menguji atau memeriksa apakah antrean dalam keadaan kosong. Operasi ini tidak membutuhkan parameter dan akan mengembalikan nilai boolean (True atau False).</li>
+        <li>size(): Mengembalikan jumlah item yang ada di dalam antrean. Operasi ini tidak membutuhkan parameter dan akan mengembalikan nilai bilangan bulat (integer).</li>
+      </ul>
+
+      <h2>Code</h2>
+
+      <pre>
+<code>
+def createQueue():
+    q = []
+    return q
+def enqueue(q,data): #front - indeks 0
+    q.insert(0,data)
+    return (q)
+def dequeue(q): #rear - indeks terakhir
+    data = q.pop()
+    return (data)
+def isEmpty(q):
+    return (q==[])
+def size(q):
+    return (len(q))
+</code>
+      </pre>
+
+      <pre>
+<code>
+antrean = createQueue()
+print("Antrean awal kosong?", isEmpty(antrean))
+
+# 2. Menambahkan data ke dalam antrean (Enqueue)
+print("\n[ ENQUEUE ] Memasukkan data: 10, 20, 30")
+enqueue(antrean, 10)
+enqueue(antrean, 20)
+enqueue(antrean, 30)
+
+# Ingat: elemen baru masuk di indeks 0
+print("Isi antrean saat ini:", antrean)
+print("Jumlah elemen dalam antrean:", size(antrean))
+
+# 3. Mengeluarkan data dari antrean (Dequeue)
+print("\n[ DEQUEUE ] Mengeluarkan data...")
+data_keluar = dequeue(antrean)
+
+# Data yang keluar pertama kali adalah data yang dimasukkan pertama kali (FIFO)
+print("Data yang dikeluarkan:", data_keluar)
+print("Isi antrean setelah dequeue:", antrean)
+print("Sisa elemen:", size(antrean))
+
+Antrean awal kosong? True
+
+[ ENQUEUE ] Memasukkan data: 10, 20, 30
+Isi antrean saat ini: [30, 20, 10]
+Jumlah elemen dalam antrean: 3
+
+[ DEQUEUE ] Mengeluarkan data...
+Data yang dikeluarkan: 10
+Isi antrean setelah dequeue: [30, 20]
+Sisa elemen: 2
+</code>
+      </pre>
+
+      <h2>Contoh code Queue dengan class</h2>
+
+      <pre>
+<code>
+    class Queue:
+
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def enqueue(self, item):
+        self.items.insert(0,item)
+
+    def dequeue(self):
+        return self.items.pop()
+
+    def size(self):
+        return len(self.items)
+</code>
+      </pre>
+
+      <h2>Latihan Soal Mandiri</h2>
+
+      <pre>
+<code>
+def queue() :
+    return []
+def enqueue(q, data) :
+    q.append(data)
+    return (q)
+def dequeue(q) :
+    data = q.pop(0)
+    return (data)
+def isEmpty(q):
+    return (q==[])
+
+
+def hotPotatoGame(a,b):
+    player = queue()
+    menang = ""
+    for i in range(1,a + 1) :
+        enqueue(player,i)
+
+    while not isEmpty(player) :
+        for i in range(b-1) :
+            ambil = dequeue(player)
+            enqueue(player, ambil)
+        pemenang = dequeue(player)
+    return pemenang
+
+hotPotatoGame(6,5)
+
+1
+</code>
+      </pre>
+
+      <pre>
+<code>
+# 1. Inisialisasi list kosong sebagai tempat antrean
+antrean_kasir = []
+
+# 2. Fungsi untuk memasukkan data ke antrean (Enqueue)
+def enqueue(antrean, item):
+    antrean.append(item)
+    print(f"{item} telah masuk ke dalam antrean.")
+
+# 3. Fungsi untuk mengeluarkan data dari antrean (Dequeue)
+def dequeue(antrean):
+    if len(antrean) == 0:
+        print("Antrean kosong! Tidak ada yang bisa dikeluarkan.")
+        return None
+
+    # pop(0) mengambil dan menghapus elemen indeks ke-0 (paling depan)
+    removed_item = antrean.pop(0)
+    print(f"{removed_item} telah selesai dilayani dan keluar dari antrean.")
+    return removed_item
+
+# 4. Fungsi opsional untuk melihat isi antrean
+def display(antrean):
+    print(f"Kondisi antrean saat ini: {antrean}\n")
+
+
+
+# Memasukkan 3 orang ke dalam antrean
+enqueue(antrean_kasir, "Andi")
+enqueue(antrean_kasir, "Budi")
+enqueue(antrean_kasir, "Citra")
+display(antrean_kasir)
+
+# Melayani orang pertama di antrean (Andi akan keluar)
+dequeue(antrean_kasir)
+display(antrean_kasir)
+
+# Ada 1 orang baru masuk antrean
+enqueue(antrean_kasir, "Dina")
+display(antrean_kasir)
+
+# Melayani orang selanjutnya (Budi akan keluar)
+dequeue(antrean_kasir)
+display(antrean_kasir)
+
+Andi telah masuk ke dalam antrean.
+Budi telah masuk ke dalam antrean.
+Citra telah masuk ke dalam antrean.
+Kondisi antrean saat ini: ['Andi', 'Budi', 'Citra']
+
+Andi telah selesai dilayani dan keluar dari antrean.
+Kondisi antrean saat ini: ['Budi', 'Citra']
+
+Dina telah masuk ke dalam antrean.
+Kondisi antrean saat ini: ['Budi', 'Citra', 'Dina']
+
+Budi telah selesai dilayani dan keluar dari antrean.
+Kondisi antrean saat ini: ['Citra', 'Dina']
+</code>
+      </pre>
+
+      <h2>Definisi Deques</h2>
+
+      <p>
+        Deques juga dikenal sebagai double-ended queue (antrean dua ujung), adalah kumpulan item berurutan yang mirip dengan queue (antrean). Struktur ini memiliki dua ujung, yaitu depan (front) dan belakang (rear), dan item-item tersebut tetap berada pada posisinya di dalam kumpulan tersebut.
+      </p>
+
+      <h2>Oprasi dalam Deques</h2>
+
+      <ul>
+        <li>Deque(): Membuat sebuah deque baru yang kosong. Operasi ini tidak membutuhkan parameter dan akan mengembalikan sebuah deque kosong.</li>
+        <li>addFront(item): Menambahkan sebuah item baru ke bagian depan (front) dari deque. Operasi ini membutuhkan parameter berupa item yang akan ditambahkan dan tidak mengembalikan nilai apa pun.</li>
+        <li>addRear(item): Menambahkan sebuah item baru ke bagian belakang (rear) dari deque. Operasi ini membutuhkan parameter berupa item yang akan ditambahkan dan tidak mengembalikan nilai apa pun.</li>
+        <li>removeFront(): Menghapus item terdepan dari deque. Operasi ini tidak membutuhkan parameter dan akan mengembalikan item yang dihapus tersebut. Struktur deque akan berubah (termodifikasi).</li>
+        <li>removeRear(): Menghapus item paling belakang dari deque. Operasi ini tidak membutuhkan parameter dan akan mengembalikan item yang dihapus tersebut. Struktur deque akan berubah (termodifikasi).</li>
+        <li>isEmpty(): Menguji atau memeriksa apakah deque dalam keadaan kosong. Operasi ini tidak membutuhkan parameter dan akan mengembalikan nilai boolean (True atau False).</li>
+        <li>size(): Mengembalikan jumlah item yang ada di dalam deque. Operasi ini tidak membutuhkan parameter dan akan mengembalikan nilai bilangan bulat (integer).</li>
+      </ul>
+
+      <h2>Code</h2>
+
+      <pre>
+<code>
+def createDeque():
+    d=[]
+    return (d)
+def addFront(d,data): #front: berada di indeks-0
+    d.insert(0,data)
+    return(d)
+def addRear(d,data): #rear: berada di indeks terakhir
+    d.append(data)
+    return(d)
+def removeRear(d):
+    data=d.pop()
+    return(data)
+def removeFront(d):
+    data=d.pop(0)
+    return(data)
+def isEmpty(d):
+    return (d==[])
+def size(d):
+    return (len(d))
+</code>
+      </pre>
+
+      <pre>
+<code>
+angka_deque = createDeque()
+print("1. Status awal, apakah Deque kosong?:", isEmpty(angka_deque))
+
+# 2. Menambahkan angka dari sisi belakang (Rear)
+print("\n2. [ ADD REAR ] Memasukkan angka 10, 20, 30...")
+addRear(angka_deque, 10)
+addRear(angka_deque, 20)
+addRear(angka_deque, 30)
+print("   Isi Deque sekarang :", angka_deque)
+
+# 3. Menambahkan angka dari sisi depan (Front)
+print("\n3. [ ADD FRONT ] Memasukkan angka 5, 2...")
+addFront(angka_deque, 5)
+addFront(angka_deque, 2)
+# Angka 2 masuk paling terakhir di depan, jadi posisinya di indeks 0
+print("   Isi Deque sekarang :", angka_deque)
+print("   Jumlah elemen      :", size(angka_deque))
+
+# 4. Mengeluarkan angka dari sisi depan (Front)
+print("\n4. [ REMOVE FRONT ] Mengambil 2 angka dari depan...")
+angka_1 = removeFront(angka_deque)
+print(f"   Angka yang diambil : {angka_1}")
+angka_2 = removeFront(angka_deque)
+print(f"   Angka yang diambil : {angka_2}")
+print("   Sisa Deque         :", angka_deque)
+
+# 5. Mengeluarkan angka dari sisi belakang (Rear)
+print("\n5. [ REMOVE REAR ] Mengambil 1 angka dari belakang...")
+angka_3 = removeRear(angka_deque)
+print(f"   Angka yang diambil : {angka_3}")
+
+# 6. Mengecek status akhir
+print("\n6. [ STATUS AKHIR ]")
+print("   Isi Deque terakhir :", angka_deque)
+print("   Total sisa angka   :", size(angka_deque))
+print("   Apakah kosong?     :", isEmpty(angka_deque))
+
+1. Status awal, apakah Deque kosong?: True
+
+2. [ ADD REAR ] Memasukkan angka 10, 20, 30...
+   Isi Deque sekarang : [10, 20, 30]
+
+3. [ ADD FRONT ] Memasukkan angka 5, 2...
+   Isi Deque sekarang : [2, 5, 10, 20, 30]
+   Jumlah elemen      : 5
+
+4. [ REMOVE FRONT ] Mengambil 2 angka dari depan...
+   Angka yang diambil : 2
+   Angka yang diambil : 5
+   Sisa Deque         : [10, 20, 30]
+
+5. [ REMOVE REAR ] Mengambil 1 angka dari belakang...
+   Angka yang diambil : 30
+
+6. [ STATUS AKHIR ]
+   Isi Deque terakhir : [10, 20]
+   Total sisa angka   : 2
+   Apakah kosong?     : False
+</code>
+      </pre>
+
+      <h2>Contoh code Dequeue dengan class</h2>
+
+      <pre>
+<code>
+    class deQueue:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def addrear(self, item):
+        self.items.insert(0,item)
+
+    def removefront(self):
+        return self.items.pop()
+
+    def addfront(self,item):
+        self.item.append()
+
+    def removerear(self):
+        return self.items.pop(0,item)
+
+    def size(self):
+        return len(self.items)
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="linkedlist">
+
+    <h1 class="title">Materi Linked List</h1>
+
+    <div class="materi-box">
+
+      <h2>Definisi :</h2>
+
+      <h2>1. Struktur Data: Linked List</h2>
+
+      <p>
+        Bahasa pemrograman Python sebenarnya sudah menyediakan tipe data yang dinamis yaitu List, di mana ukurannya dapat diatur sesuai keinginan programmer selama program dijalankan dan tidak harus memiliki ukuran tetap di awal. Namun, karena tidak semua bahasa pemrograman menyediakan tipe data seperti ini, programmer dapat membuat struktur data dinamis sendiri yang disebut dengan Linked List.
+      </p>
+
+      <h2>Node (Simpul)</h2>
+
+      <ul>
+        <li>Di dalam memori, data-data berada di alamat yang berbeda-beda, sehingga dibutuhkan informasi tambahan (berupa tautan/link) yang menunjukkan alamat data berikutnya agar mereka saling terhubung satu sama lain.</li>
+        <li>Lokasi data pertama dari linked list harus diketahui secara eksplisit agar data kedua, ketiga, dan seterusnya dapat ditemukan; penunjuk lokasi data pertama ini disebut dengan external reference atau Head.</li>
+        <li>Begitu juga dengan data terakhir, harus ada informasi spesifik yang menunjukkan bahwa tidak ada lagi data berikutnya di dalam rantai tersebut.</li>
+        <li>Untuk membangun linked list, dibuatlah tipe data baru berupa class Node yang memuat dua informasi utama: data/nilai itu sendiri, dan informasi next (node berikutnya).</li>
+        <li>Pada saat instansiasi node baru, properti next ini akan diset menjadi None sebagai representasi dari Nil atau Ground, yang berarti node tersebut belum menunjuk ke mana-mana.</li>
+        <li>Class Node memiliki beberapa method penting, yaitu: constructor (dijalankan saat instansiasi), getData (mengetahui isi data), getNext (mengetahui node tujuan), setData (mengubah data), dan setNext (menentukan node tujuan berikutnya).</li>
+      </ul>
+
+      <pre>
+<code>
+# IMPLEMENTASI CODE: CLASS NODE
+class Node:
+def __init__(self, init_data):
+    self.data = init_data
+    self.next = None
+
+def getData(self):
+    return self.data
+
+def getNext(self):
+    return self.next
+
+def setData(self, newdata):
+    self.data = newdata
+
+def setNext(self, new_next):
+    self.next = new_next
+</code>
+      </pre>
+
+      <h2>Definisi :</h2>
+
+      <h2>2. Unordered Linked List</h2>
+
+      <p>
+        Linked list merupakan kumpulan dari node-node yang terhubung satu sama lain. Untuk mengaksesnya, diperlukan pointer head yang menunjukkan keberadaan node pertama.
+      </p>
+
+      <h2>Operasi pada Unordered List:</h2>
+
+      <ul>
+        <li>Constructor & isEmpty: Saat obyek baru dibuat, list masih kosong sehingga pointer head bernilai None. Pengecekan list kosong dilakukan lewat method isEmpty.</li>
+        <li>Penambahan Data (Add): Secara default, penambahan data baru diletakkan pada awal linked list atau pada pointer head.</li>
+        <li>Tahapannya: tautkan node baru ini ke node awal linked list terlebih dahulu, lalu modifikasi head agar menunjuk pada node baru ini. Urutan ini sama sekali tidak boleh dibalik agar linked list awal tidak hilang.</li>
+        <li>Traversal (Size, Search, Display): Proses menelusuri setiap node membutuhkan pointer bantuan (misalnya pointer curent) yang bergerak dari node awal sampai akhir, yang ditandai ketika pointer menunjuk pada None. Traversal berguna untuk menghitung jumlah node, mencari data, dan menampilkan seluruh node.</li>
+        <li>Penghapusan Node (Remove): Sebelum data dihapus, perlu dilakukan pentautan antara node sebelum node yang dicari dengan node sesudahnya. Hal ini membutuhkan pointer previous yang bergerak satu langkah di belakang pointer curent. Jika data yang dihapus ada di node awal list, head langsung menunjuk pada node setelahnya.</li>
+      </ul>
+
+      <pre>
+<code>
+# IMPLEMENTASI CODE: UNORDERED LINKED LIST
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def isEmpty(self):
+        return self.head == None
+
+    def add(self, item):
+        temp = Node(item)
+        temp.setNext(self.head)
+        self.head = temp
+
+    def size(self):
+        curent = self.head
+        count = 0
+        while curent != None:
+            count = count + 1
+            curent = curent.getNext()
+        return count
+
+    def search(self, item):
+        curent = self.head
+        found = False
+        while curent != None and not found:
+            if curent.getData() == item:
+                found = True
+            else:
+                curent = curent.getNext()
+        return found
+
+    def display(self):
+        curent = self.head
+        while curent != None:
+            print(curent.getData())
+            curent = curent.getNext()
+
+    def remove(self, item):
+        curent = self.head
+        previous = None
+        found = False
+        while not found:
+            if curent.getData() == item:
+                found = True
+            else:
+                previous = curent
+                curent = curent.getNext()
+
+        if previous == None:
+            self.head = curent.getNext()
+        else:
+            previous.setNext(curent.getNext())
+</code>
+      </pre>
+
+      <h2>Definisi :</h2>
+
+      <h2>3. Ordered Linked List</h2>
+
+      <p>
+        Class Ordered List akan memudahkan pencarian suatu node karena data yang terdapat pada class ini sudah dalam keadaan terurut
+      </p>
+
+      <h2>Karakteristik Ordered List:</h2>
+
+      <ul>
+        <li>Pencarian Lebih Cepat: Proses pencarian akan menjadi lebih cepat karena dapat dihentikan ketika ditemukan node dengan data lebih rendah atau lebih tinggi dari yang dicari</li>
+        <li>Penambahan Data (Add): Terdapat perbedaan pada method untuk menambah data (add) karena node yang terbentuk harus disisipkan secara spesifik agar list selalu dalam keadaan terurut</li>
+      </ul>
+
+      <pre>
+<code>
+# IMPLEMENTASI CODE: ORDERED LINKED LIST
+class OrderedLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def isEmpty(self):
+        return self.head == None
+
+    def size(self):
+        curent = self.head
+        count = 0
+        while curent != None:
+            count = count + 1
+            curent = curent.getNext()
+        return count
+
+    def display(self):
+        curent = self.head
+        while curent != None:
+            print(curent.getData())
+            curent = curent.getNext()
+
+    def remove(self, item):
+        curent = self.head
+        previous = None
+        found = False
+        while not found:
+            if curent.getData() == item:
+                found = True
+            else:
+                previous = curent
+                curent = curent.getNext()
+        if previous == None:
+            self.head = curent.getNext()
+        else:
+            previous.setNext(curent.getNext())
+
+    def search(self, item):
+        curent = self.head
+        found = False
+        stop = False
+        while curent != None and not found and not stop:
+            if curent.getData() == item:
+                found = True
+            else:
+                if curent.getData() > item:
+                    stop = True
+                else:
+                    curent = curent.getNext()
+        return found
+
+    def add(self, item):
+        curent = self.head
+        previous = None
+        stop = False
+        while curent != None and not stop:
+            if curent.getData() > item:
+                stop = True
+            else:
+                previous = curent
+                curent = curent.getNext()
+
+        temp = Node(item)
+        if previous == None:
+            temp.setNext(self.head)
+            self.head = temp
+        else:
+            temp.setNext(curent)
+            previous.setNext(temp)
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="hashing">
+
+    <h1 class="title">Materi Hashing</h1>
+
+    <div class="materi-box">
+
+      <h2>Definisi :¶</h2>
+
+      <h2>1. Hashing¶</h2>
+
+      <p>
+        Hashing adalah algoritma pencarian di mana semua data terletak tepat berada ditempatnya masing-masing, sehingga pencarian dilakukan hanya dengan satu kali proses perbandingan saja. Di dalam algoritma hashing ini terdapat beberapa istilah dasar:
+      </p>
+
+      <ul>
+        <li>Hash Table: Sebuah tempat penyimpanan data, yang dibuat sedemikian rupa, sehingga dapat memudahkan pencarian. Tipe data list di python dapat digunakan untuk merepresentasikan hash table.</li>
+        <li>Slot: Posisi (indeks) yang terdapat pada hash table sebagai tempat penyimpanan setiap data. Nilai slot adalah integer mulai dari nol sampai dengan ukuran dari hash table.</li>
+        <li>Hash Function: Suatu fungsi yang memetakan antara data dengan slot di dalam hash table.</li>
+      </ul>
+
+      <h2>Cara Kerja:¶</h2>
+
+      <ul>
+        <li>Data di dalam list disusun berdasarkan nilai hash, dan pencarian data dilakukan berdasarkan nilai hash dari hash function.</li>
+        <li>Pencarian data dilakukan hanya dengan cara menghitung function hash berdasarkan data tersebut.</li>
+        <li>Nilai balik dari perhitungan tersebut merupakan index atau slot dari data di dalam list.</li>
+        <li>Kemudian dilakukan pengecekan keberadaan data tersebut hanya dengan satu kali perbandingan saja.</li>
+        <li>Jika terdapat data dengan nilai hash yang sama sehingga mengacu pada nomor slot yang sama, maka akan terjadi masalah yang disebut collusion.</li>
+        <li>Collusion ini dapat ditangani dengan konsep open addressing (mencari slot kosong) seperti Linear Probing atau Quadratic Probing, maupun dengan metode Chaining di mana satu slot dapat ditempati oleh beberapa data sekaligus.</li>
+      </ul>
+
+      <h2>Fungsi Hash:¶</h2>
+
+      <p>
+        Hash function memiliki parameter nilai data dan mengembalikan nilai integer (nilai hash) yang merupakan representasi dari nomor slot. Berikut adalah beberapa metode fungsi hash:
+      </p>
+
+      <ul>
+        <li>Remainder Function: Fungsi hash sederhana di mana nilai baliknya berupa modulus dari data tersebut dengan sebuah angka (misalnya ukuran dari tabel). Contoh: terdapat data bernilai 54 dengan ukuran tabel 11, maka nilai hash = 54 % 11, yaitu 4.</li>
+        <li>Mid-Square Method: Ini adalah contoh perfect hash function yang bertujuan meminimalkan terjadinya collusion. Metodenya adalah mengkuadratkan nilai data, kemudian mengambil bagian tertentu (tengah) dari data tersebut, lalu dimodulus dengan ukuran tabel. Contoh: data 35 dikuadratkan menjadi 1225, diambil nilai tengahnya yaitu 22, lalu 22 % 11, hasilnya adalah slot 0.</li>
+        <li>Fungsi Hash untuk String: Hash function juga dapat digunakan untuk tipe data string dengan mengambil jumlah nilai ASCII karakter-karakter penyusun data tersebut menggunakan perintah ord. Untuk menghindari collusion pada kata anagram (contoh 'dia' dan 'adi' yang nilai ASCII totalnya sama), dapat digunakan bobot yang menunjukkan posisi masing-masing karakter untuk dikalikan dengan nilai ASCII-nya.</li>
+      </ul>
+
+      <h2>CODE¶</h2>
+
+      <pre>
+<code>
+# 1. Membuat Hash Table dengan semua slot bernilai 'none'
+def createHashTable(num):
+    temp = []
+    for i in range(num):
+        temp.append('none')
+    return temp
+
+# 2. Fungsi Hash menggunakan metode Remainder (Modulus)
+def remainderFunction(data, num):
+    return (data % num)
+
+# 3. Penanganan Collusion dengan Linear Probing
+def linearProbing(ind, hashTable, data):
+    count = ind
+    found = False
+
+    # Cari slot yang kosong ('none') dengan maju satu langkah terus menerus
+    while (count != ind - 1) and not (found):
+        if hashTable[count] == 'none':
+            found = True
+        else:
+            # Jika belum kosong, pindah ke slot berikutnya
+            hashTable[count] = data # (Dalam PDF tertulis di bagian ini, tapi logika yang benar harus di assign saat found)
+            count = count + 1
+
+            # Jika pencarian mencapai akhir list, kembali ke indeks 0
+            if count == len(hashTable):
+                count = 0
+
+    # Memasukkan data setelah menemukan slot kosong
+    if found:
+        hashTable[count] = data
+
+    return hashTable
+
+# 4. Memasukkan data ke dalam tabel dengan fungsi Hash & Penanganan Collision
+def putData3(a, hashTable, functionName):
+    for i in range(len(a)):
+        if functionName == 'reminder':
+            ind = remainderFunction(a[i], len(hashTable))
+
+        # Jika slot masih kosong, langsung masukkan
+        if hashTable[ind] == 'none':
+            hashTable[ind] = a[i]
+        # Jika sudah ada isinya (Collusion), selesaikan dengan Linear Probing
+        else:
+            hashTable = linearProbing(ind, hashTable, a[i])
+
+    return hashTable
+
+# 5. Pencarian Data Sederhana pada Hash Table
+def searchHash(data, table):
+    hashVal = remainderFunction(data, len(table))
+    if data == table[hashVal]:
+        return True
+    else:
+        return False
+
+# 6. Fungsi Hash Khusus untuk Data String (Berdasarkan Nilai ASCII)
+def strVal(strData):
+    temp = 0
+    for i in range(len(strData)):
+        temp = temp + ord(strData[i])
+    return temp
+
+
+# ==========================================
+# CONTOH PENGGUNAAN
+# ==========================================
+if __name__ == "__main__":
+    # Data awal beserta data baru yang akan memicu collusion (44, 55, 20)
+    data_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+
+    # Buat hash table dengan ukuran 11
+    hashTable = createHashTable(11)
+    print("Hash Table Kosong:")
+    print(hashTable)
+    print("-" * 50)
+
+    # Memasukkan seluruh data ke dalam tabel
+    hashTable = putData3(data_list, hashTable, 'reminder')
+
+    print("\nHash Table Setelah Diisi Data (beserta penanganan Collusion):")
+    print(hashTable)
+    print("-" * 50)
+
+    # Pengujian mencari data
+    print("\nApakah 93 ada di dalam tabel?", searchHash(93, hashTable))
+
+Hash Table Kosong:
+['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none']
+--------------------------------------------------
+
+Hash Table Setelah Diisi Data (beserta penanganan Collusion):
+[20, 20, 20, 20, 26, 93, 17, 'none', 'none', 20, 20]
+--------------------------------------------------
+
+Apakah 93 ada di dalam tabel? True
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="tree">
+
+    <h1 class="title">Materi Tree</h1>
+
+    <div class="materi-box">
+
+      <h2>Definisi :</h2>
+
+      <h2>1. Tree</h2>
+
+      <p>
+        Tree merupakan struktur data yang berbentuk non-linear, sangat berbeda dengan struktur data linear seperti stack, queue, ataupun deque. Bentuk tree di dalam computer science memiliki kemiripan dengan pohon di ekosistem biologi karena sama-sama memiliki akar (root), cabang (branches), dan daun (leaves). Bedanya, akar pada tree struktur data terletak di bagian paling atas, sedangkan cabang dan daunnya menjuntai ke bawah.
+      </p>
+
+      <h2>Istilah-istilah Dasar pada Tree:</h2>
+
+      <ul>
+        <li>Node: Bagian dari tree yang menyimpan informasi, nilai, atau key.</li>
+        <li>Edge: Garis yang menghubungkan antara satu node dengan node lainnya. Dalam sebuah node hanya boleh ada satu edge yang masuk, namun bisa ada satu atau banyak edge yang keluar.</li>
+        <li>Root: Node yang posisinya paling atas. Root tidak memiliki edge yang masuk, tapi memiliki satu atau lebih edge yang keluar darinya.</li>
+        <li>Path: Rute atau urutan node dari root menuju ke sebuah node tujuan.</li>
+        <li>Parent & Children: Parent adalah node yang memiliki edge keluar yang mengarah ke node lain. Node yang dituju oleh edge tersebut disebut sebagai Children.</li>
+        <li>Siblings: Node-node (children) yang berasal dari parent yang sama.</li>
+        <li>Subtree: Kumpulan dari node dan edge yang terdiri dari sebuah parent dan semua node yang berada di bawahnya.</li>
+        <li>Leaf Node (Daun): Node yang terletak paling ujung karena tidak memiliki edge yang keluar (tidak punya children).</li>
+        <li>Level & Height: Level adalah tingkatan dari node (Root selalu dihitung sebagai level ke-0, makin ke bawah level makin besar). Height adalah tinggi keseluruhan tree yang didapat dari nilai level maksimumnya.</li>
+      </ul>
+
+      <h2>Definisi :</h2>
+
+      <h2>2. Binary Tree</h2>
+
+      <p>
+        Binary tree merupakan sebuah tree spesifik di mana setiap parent di dalamnya hanya diizinkan untuk memiliki maksimal dua buah node children, atau satu node child saja.
+      </p>
+
+      <h2>Karakteristik & Operasi Binary Tree:</h2>
+
+      <ul>
+        <li>Representasi Class: Karena di dalam binary tree setiap node harus memiliki informasi mengenai nilai node serta penunjuk/edge ke anak kiri dan kanannya, struktur ini sangat ideal diimplementasikan menggunakan tipe data class.</li>
+        <li>Properti Utama: Class Binary Tree umumnya memiliki tiga properti: key untuk menyimpan nilai, leftChild untuk menunjuk ke anak sebelah kiri, dan rightChild untuk menunjuk ke anak sebelah kanan.</li>
+        <li>Penyisipan Node (Insert): Terdapat method insertLeft dan insertRight. Jika posisi child yang akan diisi masih kosong (None), node baru bisa langsung dimasukkan. Namun, jika posisi child tersebut sudah terisi, maka node baru harus disisipkan di antara parent dan child lama tersebut agar rantai data di bawahnya tidak hilang atau terputus 1438, 1461, 1464, 1492, 1496].</li>
+      </ul>
+
+      <pre>
+<code>
+# IMPLEMENTASI CODE: BINARY TREE
+class BinaryTree:
+    def __init__(self, root):
+        self.key = root
+        self.leftChild = None
+        self.rightChild = None
+
+    def insertLeft(self, new_node):
+        # Jika anak kiri masih kosong, langsung masukkan node baru
+        if self.leftChild == None:
+            self.leftChild = BinaryTree(new_node)
+        # Jika anak kiri sudah ada isinya, sisipkan di antaranya
+        else:
+            t = BinaryTree(new_node)
+            t.leftChild = self.leftChild
+            self.leftChild = t
+
+    def insertRight(self, new_node):
+        # Jika anak kanan masih kosong, langsung masukkan node baru
+        if self.rightChild == None:
+            self.rightChild = BinaryTree(new_node)
+        # Jika anak kanan sudah ada isinya, sisipkan di antaranya
+        else:
+            t = BinaryTree(new_node)
+            t.rightChild = self.rightChild
+            self.rightChild = t
+
+    def getRightChild(self):
+        return self.rightChild
+
+    def getLeftChild(self):
+        return self.leftChild
+
+    def setRootVal(self, obj):
+        self.key = obj
+
+    def getRootVal(self):
+        return self.key
+
+# ==========================================
+# CONTOH PENGGUNAAN (Sesuai Latihan)
+# ==========================================
+if __name__ == "__main__":
+    # Membuat root node 'a'
+    myTree = BinaryTree('a')
+
+    # Menambahkan child 'b' di kiri dan 'c' di kanan
+    myTree.insertLeft('b')
+    myTree.insertRight('c')
+
+    # Menambahkan 'd' di kanan node 'b'
+    myTree.getLeftChild().insertRight('d')
+
+    # Menambahkan 'e' di kiri dan 'f' di kanan node 'c'
+    myTree.getRightChild().insertLeft('e')
+    myTree.getRightChild().insertRight('f')
+
+    # Menampilkan hasil
+    print("Root                      :", myTree.getRootVal())
+    print("Anak Kiri dari Root       :", myTree.getLeftChild().getRootVal())
+    print("Anak Kanan dari Root      :", myTree.getRightChild().getRootVal())
+    print("Anak Kanan dari node 'b'  :", myTree.getLeftChild().getRightChild().getRootVal())
+    print("Anak Kiri dari node 'c'   :", myTree.getRightChild().getLeftChild().getRootVal())
+
+Root                      : a
+Anak Kiri dari Root       : b
+Anak Kanan dari Root      : c
+Anak Kanan dari node 'b'  : d
+Anak Kiri dari node 'c'   : e
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <footer>
+    <p>
+      © 2026 - Website Struktur Data | Adhitya Firmanyah - 250411100017
+    </p>
+    <section id="bubble">
+
+    <h1 class="title">Bubble Sort</h1>
+
+    <div class="materi-box">
+      <h2>Definisi :</h2>
+
+      <h2>1. Bubble Sort</h2>
+
+      <p>
+        Bubble Sort adalah algoritma pengurutan sederhana yang bekerja dengan cara menelusuri daftar secara berulang, membandingkan setiap pasangan item yang berdekatan, dan menukarnya jika berada dalam urutan yang salah.
+      </p>
+
+      <h2>Cara Kerja</h2>
+
+      <ul>
+        <li>Membandingkan elemen berdekatan</li>
+        <li>Jika elemen saat ini lebih besar dari elemen berikutnya (Ist[i]>Ist[i+1]), maka keduanya ditukar.</li>
+        <li>Proses ini terus dilakukan hingga elemen terbesar "terapung" ke posisi akhir pada setiap iterasi (pass).</li>
+      </ul>
+
+      <pre>
+<code>
+    def bubbleSort(listData):
+    print('Data yang akan diurutkan : ', listData)
+    count=0
+    for outIter in range(len(listData)-1,-1,-1):
+        print('outIter=',outIter)
+        # count=count+1
+        print ('Iterasi ke-', count,':')
+        for i in range(outIter):
+            if listData[i]>listData[i+1]:
+                # temp=listData[i]
+                # listData[i]=listData[i+1]
+                # listData[i+1]=temp
+                listData[i],listData[i+1]=listData[i+1],listData[i]
+                count+=1
+            print(outIter,'=',listData)
+        # print("Jumlah Swap =",count)
+    print('Data urut-',listData)
+    # print("Total Swap =",count)
+</code>
+      </pre>
+
+      <pre>
+<code>
+a=[12,0,5,1,11,20,4,2]
+bubbleSort(a)
+# b=[12,11,5,1,0]
+# print('--')
+# bubbleSort(b)
+
+Data yang akan diurutkan :  [12, 0, 5, 1, 11, 20, 4, 2]
+outIter= 7
+Iterasi ke- 0 :
+7 = [0, 12, 5, 1, 11, 20, 4, 2]
+7 = [0, 5, 12, 1, 11, 20, 4, 2]
+7 = [0, 5, 1, 12, 11, 20, 4, 2]
+7 = [0, 5, 1, 11, 12, 20, 4, 2]
+7 = [0, 5, 1, 11, 12, 20, 4, 2]
+7 = [0, 5, 1, 11, 12, 4, 20, 2]
+7 = [0, 5, 1, 11, 12, 4, 2, 20]
+outIter= 6
+Iterasi ke- 6 :
+6 = [0, 5, 1, 11, 12, 4, 2, 20]
+6 = [0, 1, 5, 11, 12, 4, 2, 20]
+6 = [0, 1, 5, 11, 12, 4, 2, 20]
+6 = [0, 1, 5, 11, 12, 4, 2, 20]
+6 = [0, 1, 5, 11, 4, 12, 2, 20]
+6 = [0, 1, 5, 11, 4, 2, 12, 20]
+outIter= 5
+Iterasi ke- 9 :
+5 = [0, 1, 5, 11, 4, 2, 12, 20]
+5 = [0, 1, 5, 11, 4, 2, 12, 20]
+5 = [0, 1, 5, 11, 4, 2, 12, 20]
+5 = [0, 1, 5, 4, 11, 2, 12, 20]
+5 = [0, 1, 5, 4, 2, 11, 12, 20]
+outIter= 4
+Iterasi ke- 11 :
+4 = [0, 1, 5, 4, 2, 11, 12, 20]
+4 = [0, 1, 5, 4, 2, 11, 12, 20]
+4 = [0, 1, 4, 5, 2, 11, 12, 20]
+4 = [0, 1, 4, 2, 5, 11, 12, 20]
+outIter= 3
+Iterasi ke- 13 :
+3 = [0, 1, 4, 2, 5, 11, 12, 20]
+3 = [0, 1, 4, 2, 5, 11, 12, 20]
+3 = [0, 1, 2, 4, 5, 11, 12, 20]
+outIter= 2
+Iterasi ke- 14 :
+2 = [0, 1, 2, 4, 5, 11, 12, 20]
+2 = [0, 1, 2, 4, 5, 11, 12, 20]
+outIter= 1
+Iterasi ke- 14 :
+1 = [0, 1, 2, 4, 5, 11, 12, 20]
+outIter= 0
+Iterasi ke- 14 :
+Data urut- [0, 1, 2, 4, 5, 11, 12, 20]
+</code>
+      </pre>
+
+      <pre>
+<code>
+b=[11,12,1,5,0]
+bubbleSort(b)
+
+Data yang akan diurutkan :  [11, 12, 1, 5, 0]
+outIter= 4
+Iterasi ke- 0 :
+4 = [11, 12, 1, 5, 0]
+4 = [11, 1, 12, 5, 0]
+4 = [11, 1, 5, 12, 0]
+4 = [11, 1, 5, 0, 12]
+outIter= 3
+Iterasi ke- 3 :
+3 = [1, 11, 5, 0, 12]
+3 = [1, 5, 11, 0, 12]
+3 = [1, 5, 0, 11, 12]
+outIter= 2
+Iterasi ke- 6 :
+2 = [1, 5, 0, 11, 12]
+2 = [1, 0, 5, 11, 12]
+outIter= 1
+Iterasi ke- 7 :
+1 = [0, 1, 5, 11, 12]
+outIter= 0
+Iterasi ke- 8 :
+Data urut- [0, 1, 5, 11, 12]
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="selection">
+
+    <h1 class="title">Selection Sort</h1>
+
+    <div class="materi-box">
+      <h2>Definisi :</h2>
+
+      <h2>1. Selection Sort</h2>
+
+      <p>
+        Selection Sort adalah algoritma pengurutan sederhana yang membagi daftar menjadi dua bagian: bagian yang sudah diurutkan dan bagian yang belum diurutkan. Algoritma ini bekerja dengan cara mencari elemen terkecil secara berulang dari bagian yang belum diurutkan, lalu memindahkan dan menukarnya ke posisi paling depan dari bagian tersebut.
+      </p>
+
+      <h2>Cara Kerja:</h2>
+
+      <ul>
+        <li>Mengasumsikan elemen pertama pada bagian yang belum diurutkan sebagai nilai terkecil sementara (minimum).</li>
+        <li>Membandingkan nilai minimum sementara tersebut dengan elemen-elemen berikutnya dalam sisa daftar.</li>
+        <li>Jika ditemukan elemen yang nilainya lebih kecil (Ist[j]<(minimum)), maka elemen tersebut diperbarui menjadi nilai minimum yang baru.</li>
+        <li>Setelah selesai memeriksa hingga akhir daftar, tukar nilai minimum yang ditemukan dengan elemen pertama dari bagian yang belum diurutkan.</li>
+        <li>Geser batas daftar yang belum diurutkan satu posisi ke kanan, lalu ulangi proses ini hingga seluruh elemen selesai diurutkan.</li>
+      </ul>
+
+      <p>
+        Berikut ilustrasi algoritma selection sort ini. Misalkan terdapat suatu data, yaitu [7, 2.5, 5, 10, 1]. Maka proses pengurutan secara ascending (dari nilai kecil sampai dengna nilai besar) dengan menggunakan algoritma Selection Sort adalah sebagai berikut :
+      </p>
+
+      <p>
+        Iterasi Pertama. Pada iterasi pertama ini, data yang memiliki nilai paling kecil, akan menempati posisi dengan indeks paling awal. Untuk mencari data dengan nilai paling kecil ini, dilakukan perbandingan sebagai berikut:
+
+        antara indeks ke-0 dengan ke-1, sehingga nilai terkecil saat ini adalah 2.5
+        antara indeks ke-1 dengan ke-2, nilai terkecil tetaplah 2.5
+        antara indeks ke-2 dengan ke-3, nilai terkecil tetaplah 2.5
+        antara indeks ke-3 dengan ke-4, didapatkan nilai terkecil adalah 1. Pada saat pencarian nilai terkecil ini tidak dilakukan proses pertukaran posisi (berbeda dengan a;goritma bubble sort). Setelah didapatkan nilai terkecil, maka nilai 1 ini akan ditukar dengan data pada posisi dengan indeks ke-0, sehingga setelah iterasi pertama berakhir, data 1, akan menempati indeks ke-0.
+      </p>
+
+      <p>
+        Iterasi Kedua. Pada iterasi kedua ini, data yang memiliki nilai paling kecil kedua, akan menempati posisi dengan indeks setelah data paling kecil, yaitu indeks ke-1. Untuk mencari data dengan nilai paling kecil kedua ini, dilakukan perbandingan, hanya saja data pada indeks ke-0 tidak perlu dibandingkan lagi, karena data pada indeks ke-0 sudah berisi data yang tepat. Perbandingan yang dilakukan untuk mencari nilai minimal kedua adalah sebagai berikut:
+
+        antara indeks ke-1 dengan ke-2, nilai terkecil tetaplah 2.5
+        antara indeks ke-2 dengan ke-3, nilai terkecil tetaplah 2.5
+        antara indeks ke-3 dengan ke-4, didapatkan nilai terkecil adalah 2.5 Setelah didapatkan nilai minimal, yaitu 2.5, maka nilai ini akan ditukar dengan data pada posisi dengan indeks ke-1, sehingga setelah iterasi kedua berakhir, data 2.5, akan menempati indeks ke-1.
+      </p>
+
+      <p>
+        Iterasi Ketiga. Iterasi ketiga bertujuan untuk menempatkan data minimal yang ketiga pada posisi yang tepat, yaitu indeks ke-2. Untuk mencari data minimal ketiga ini, dilakukan perbandingan, hanya saja data pada indeks ke-0 dan ke-1 tidak perlu dibandingkan lagi, karena data pada indeks ke-0 dan ke-1, sudah berisi data yang tepat. Perbandingan yang dilakukan untuk mencari nilai minimal kedua adalah sebagai berikut:
+
+        antara indeks ke-2 dengan ke-3, nilai terkecil adalah 5
+        antara indeks ke-3 dengan ke-4, didapatkan nilai terkecil adalah 5 Setelah didapatkan nilai minimal, yaitu 5, maka nilai ini akan ditukar dengan data pada posisi dengan indeks ke-2, sehingga setelah iterasi kedua berakhir, data 5, akan menempati indeks ke-2.
+      </p>
+
+      <h2>CODE</h2>
+
+      <pre>
+<code>
+    def selectionSort(listData):
+    print('Algoritma Selection Sort konvensional')
+    print('Data Awal=',listData)
+    for outIter in range(len(listData)-1):
+        minIndex=outIter
+        for i in range(outIter+1,len(listData)):
+            if listData[i] < listData[minIndex]:
+                minIndex=i
+
+        temp=listData[outIter]
+        listData[outIter]=listData[minIndex]
+        listData[minIndex]=temp
+        print('Iterasi ke-',outIter+1,':',listData)
+    print('Data Urut=',listData)
+</code>
+      </pre>
+
+      <pre>
+<code>
+    a=[10,2,5,8,1,20,7,12,4]
+    selectionSort(a)
+
+Algoritma Selection Sort konvensional
+Data Awal= [10, 2, 5, 8, 1, 20, 7, 12, 4]
+Iterasi ke- 1 : [1, 2, 5, 8, 10, 20, 7, 12, 4]
+Iterasi ke- 2 : [1, 2, 5, 8, 10, 20, 7, 12, 4]
+Iterasi ke- 3 : [1, 2, 4, 8, 10, 20, 7, 12, 5]
+Iterasi ke- 4 : [1, 2, 4, 5, 10, 20, 7, 12, 8]
+Iterasi ke- 5 : [1, 2, 4, 5, 7, 20, 10, 12, 8]
+Iterasi ke- 6 : [1, 2, 4, 5, 7, 8, 10, 12, 20]
+Iterasi ke- 7 : [1, 2, 4, 5, 7, 8, 10, 12, 20]
+Iterasi ke- 8 : [1, 2, 4, 5, 7, 8, 10, 12, 20]
+Data Urut= [1, 2, 4, 5, 7, 8, 10, 12, 20]
+</code>
+
+    </pre>
+
+    </div>
+
+  </section>
+
+  <section id="insertion">
+
+    <h1 class="title">Insertion Sort</h1>
+
+    <div class="materi-box">
+      <h2>Definisi :</h2>
+
+      <h2>1. Insertion Sort</h2>
+
+      <P>
+        Insertion Sort adalah algoritma pengurutan sederhana yang membangun daftar yang diurutkan secara bertahap, elemen demi elemen. Algoritma ini bekerja dengan cara mengambil satu elemen dari daftar yang belum diurutkan dan menyisipkannya ke posisi yang benar di dalam bagian daftar yang sudah diurutkan.
+      </p>
+
+      <h2>Cara Kerja:</h2>
+
+      <ul>
+        <li>Memulai proses dari elemen kedua (indeks ke-1), karena elemen pertama (indeks ke-0) diasumsikan sudah terurut.</li>
+        <li>Menyimpan elemen saat ini sebagai variabel kunci (key) dan membandingkannya dengan elemen-elemen sebelumnya.</li>
+        <li>Jika elemen sebelumnya lebih besar dari kunci (Ist[j]>key), maka elemen tersebut digeser satu posisi ke kanan (Ist[j+1]=Ist[j]).</li>
+        <li>Proses pergeseran ini terus dilakukan ke belakang hingga menemukan elemen yang lebih kecil atau sama dengan kunci, lalu key  disisipkan ke posisi yang tepat. Proses ini diulang hingga seluruh daftar selesai diurutkan.</li>
+      </ul>
+
+      <p>
+        Berikut ilustrasi insertion sort (ascending). Misalkan terdapat data yang memiliki nilai [7, 2.5, 5, 10, 1].
+      </p>
+
+      <p>
+        Iterasi Pertama. Pada iterasi pertama, diasumsikan indeks ke-0, adalah data yang sudah dalam keadaan terurut. Data yang digunakan sebagai key, adalah data indeks ke-1. Langkah berikutnya adalah menyisipkan key pada kumpulan data terurut sebelumnya, sehingga data saat ini menjadi [2.5, 7, 5, 10, 1]. Akhir dari iterasi pertama adalah, data pada indeks ke-0 dan indeks ke-1, sudah dalam keadaan terurut
+      </p>
+
+      <p>
+        Iterasi Kedua. Pada iterasi kedua menjadikan data pada indeks ke-2, yaitu 5, menjadi key. Sehingga pada iterasi kedua ini, berusaha menyispikan key pada kumpulan data terurut sebelumnya, yaitu [2.5, 7], dengan cara membandingkan satu persatu. Karena nilai key lebih kecil dari 7, dan lebih besar dari 2.5, maka key disisipkan diantara kedua nilai tersebut, sehingga data setelah iterasi kedua, menjadi [2.5, 5, 7, 10, 1]. Dapat dilihat bahwa data indeks ke-0, sampai dengan indeks ke-2, sudah dalam keadaan terurut
+      </p>
+
+      <p>
+        Iterasi Ketiga. Key pada iterasi ketiga adalah data pada indeks ke-3, yaitu 10. Tujuan akhir dari iterasi ketiga adalah mencari lokasi yang tepat untuk data 10 diantara data yang sudah urut sebelumnya, yaitu [2.5, 5, 7]. Karena perbandingan pertama yang dilakukan adalah dengan data 7, dan 10 > 7, maka data 10 berada pada tempat yang sama.
+      </p>
+
+      <p>
+        Iterasi Keempat. Key untuk iterasi keempat adalah data pada indeks ke-4, yaitu 1. Pada iterasi keempat ini bertujuan untuk menyisipkan data 1 pada data yang sudah dalam keaadan urut sebelumnya, yaitu [2.5, 5, 7, 10]. Perbandingan dilakukan sebanyak empat kali untuk mencari posisi yang tepat untuk data 1 ini. Sehingga data 1 harus disisipkan, sebelum data 2.5
+      </p>
+
+      <p>
+        Akhir dari iterasi keempat ini adalah data sudah dalam keaadan terurut
+      </p>
+
+      <pre>
+<code>
+    def insertionSort(listData):
+    for outIter in range(1,len(listData)):
+        print(listData)
+        key=listData[outIter]
+        ind=outIter
+        while (ind>0 and listData[ind-1]>key):
+            listData[ind]=listData[ind-1]
+            ind=ind-1
+            print('inner=',listData)
+        listData[ind]=key
+
+    print('sortedData=',listData)
+</code>
+      </pre>
+
+      <pre>
+<code>
+# b=[10,2,5,8]
+b=[3, 5, 9, 12, 14, 15, 19]
+insertionSort(b)
+
+[3, 5, 9, 12, 14, 15, 19]
+[3, 5, 9, 12, 14, 15, 19]
+[3, 5, 9, 12, 14, 15, 19]
+[3, 5, 9, 12, 14, 15, 19]
+[3, 5, 9, 12, 14, 15, 19]
+[3, 5, 9, 12, 14, 15, 19]
+sortedData= [3, 5, 9, 12, 14, 15, 19]
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="counting">
+
+    <h1 class="title">Counting Sort</h1>
+
+    <div class="materi-box">
+      <h2>Definisi :</h2>
+
+      <h2>1. Counting Sort</h2>
+
+      <p>
+        Counting Sort adalah algoritma pengurutan yang sangat efisien karena tidak membandingkan elemen satu sama lain. Algoritma ini bekerja dengan cara menghitung jumlah kemunculan (frekuensi) dari setiap nilai unik di dalam daftar, lalu menggunakan informasi tersebut untuk menempatkan elemen tepat pada posisi akhirnya.
+      </p>
+
+      <h2>Cara Kerja:</h2>
+
+      <ul>
+        <li>Mencari nilai tertinggi (maksimum) di dalam daftar untuk menentukan rentang angka.</li>
+        <li>Membuat daftar sementara (count array) untuk menghitung seberapa sering setiap angka muncul.</li>
+        <li>Menjumlahkan nilai di count array secara kumulatif. Nilai kumulatif ini akan menjadi penunjuk indeks pasti di mana angka tersebut harus diletakkan.</li>
+        <li>Menelusuri data awal dari belakang ke depan, lalu menempatkan setiap angka ke daftar hasil (output array) berdasarkan indeks kumulatifnya.</li>
+        <li>Setiap kali angka ditempatkan, nilai kumulatifnya dikurangi satu.</li>
+      </ul>
+
+      <h2>CODE</h2>
+
+      <pre>
+<code>
+# Fungsi Counting Sort
+def counting_sort(arr):
+    # Jika list kosong, langsung kembalikan
+    if len(arr) == 0:
+        return arr
+
+    # 1. Cari nilai maksimum untuk menentukan ukuran array penghitung
+    max_val = max(arr)
+
+    # 2. Siapkan array penghitung (count) dan array hasil (output) dengan nilai awal 0
+    count = [0] * (max_val + 1)
+    output = [0] * len(arr)
+
+    # 3. Hitung jumlah kemunculan setiap angka
+    for num in arr:
+        count[num] += 1
+
+    # 4. Ubah array penghitung menjadi jumlah kumulatif
+    for i in range(1, len(count)):
+        count[i] += count[i - 1]
+
+    # 5. Tempatkan angka ke posisi yang benar di array hasil
+    # (Ditelusuri dari belakang agar stabil)
+    for i in range(len(arr) - 1, -1, -1):
+        num = arr[i]
+        output[count[num] - 1] = num
+        count[num] -= 1
+
+    return output
+
+# ==========================================
+# CONTOH PENGGUNAAN
+# ==========================================
+if __name__ == "__main__":
+    data_acak = [54, 26, 93, 17, 1, 31, 2, 55, 20, 93, 20, 3, 4, 5]
+
+    print("Data Awal             :", data_acak)
+
+    hasil = counting_sort(data_acak)
+
+    print("Data Setelah Diurutkan:", hasil)
+
+Data Awal             : [54, 26, 93, 17, 1, 31, 2, 55, 20, 93, 20, 3, 4, 5]
+Data Setelah Diurutkan: [1, 2, 3, 4, 5, 17, 20, 20, 26, 31, 54, 55, 93, 93]
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="merge">
+
+    <h1 class="title">Merge Sort</h1>
+
+    <div class="materi-box">
+      <h2>Definisi :</h2>
+
+      <h2>1. Merge Sort</h2>
+
+      <p>
+        Merge Sort merupakan algoritma pengurutan dengan konsep rekursif yang terdiri dari dua tahapan utama, yaitu Splitting (divide) dan Merging. Algoritma ini didasarkan pada prinsip bahwa jika hanya terdapat satu elemen dalam sebuah list data, maka data tersebut otomatis sudah dalam keadaan terurut.
+      </p>
+
+      <h2>Cara Kerja:</h2>
+
+      <ul>
+        <li>Tahap Divide (Splitting): Merupakan proses Top-Down di mana list data dibagi menjadi dua buah bagian secara terus menerus.</li>
+        <li>Pembagian data ini dilakukan sampai hanya tersisa satu elemen saja didalam list.</li>
+        <li>Tahap Merging: Merupakan tahapan Bottom-up process yang menggabungkan data-data yang sudah terbagi pada tahap divide.</li>
+        <li>Proses merge ini melibatkan proses membandingkan data antara list yang akan digabung.</li>
+        <li>Jika data lebih kecil, maka data tersebut akan diletakkan pada indeks yang lebih rendah.</li>
+        <li>Proses ini akan dilakukan terus menerus, sehingga tidak ada lagi list yang akan digabungkan dan data pada list akan terurut sempurna.</li>
+      </ul>
+
+      <h2>CODE</h2>
+
+      <pre>
+<code>
+def merge_sort(a_list):
+    print("Splitting", a_list)
+
+    # Akan terus dibagi selama panjang list lebih dari 1
+    if len(a_list) > 1:
+        mid = len(a_list) // 2
+        left_half = a_list[:mid]
+        right_half = a_list[mid:]
+
+        # Pemanggilan rekursif untuk membagi sisi kiri dan kanan
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = 0 # indeks untuk left_half
+        j = 0 # indeks untuk right_half
+        k = 0 # indeks hasil merging/sorting pada a_list
+
+        # Proses Merging: Membandingkan elemen dari left_half dan right_half
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                a_list[k] = left_half[i]
+                i = i + 1
+            else:
+                a_list[k] = right_half[j]
+                j = j + 1
+            k = k + 1
+
+        # Memasukkan sisa elemen dari left_half (jika ada)
+        while i < len(left_half):
+            a_list[k] = left_half[i]
+            i = i + 1
+            k = k + 1
+
+        # Memasukkan sisa elemen dari right_half (jika ada)
+        while j < len(right_half):
+            a_list[k] = right_half[j]
+            j = j + 1
+            k = k + 1
+
+    print("Merging", a_list)
+
+
+# ==========================================
+# CONTOH PENGGUNAAN
+# ==========================================
+if __name__ == "__main__":
+    a = [38, 12, 65, 22, 78, 25, 83, 21, 90]
+    print("Data Awal:", a)
+    print("-" * 30)
+
+    merge_sort(a)
+
+    print("-" * 30)
+    print("Data Setelah Diurutkan:", a)
+
+Data Awal: [38, 12, 65, 22, 78, 25, 83, 21, 90]
+------------------------------
+Splitting [38, 12, 65, 22, 78, 25, 83, 21, 90]
+Splitting [38, 12, 65, 22]
+Splitting [38, 12]
+Splitting [38]
+Merging [38]
+Splitting [12]
+Merging [12]
+Merging [12, 38]
+Splitting [65, 22]
+Splitting [65]
+Merging [65]
+Splitting [22]
+Merging [22]
+Merging [22, 65]
+Merging [12, 22, 38, 65]
+Splitting [78, 25, 83, 21, 90]
+Splitting [78, 25]
+Splitting [78]
+Merging [78]
+Splitting [25]
+Merging [25]
+Merging [25, 78]
+Splitting [83, 21, 90]
+Splitting [83]
+Merging [83]
+Splitting [21, 90]
+Splitting [21]
+Merging [21]
+Splitting [90]
+Merging [90]
+Merging [21, 90]
+Merging [21, 83, 90]
+Merging [21, 25, 78, 83, 90]
+Merging [12, 21, 22, 25, 38, 65, 78, 83, 90]
+------------------------------
+Data Setelah Diurutkan: [12, 21, 22, 25, 38, 65, 78, 83, 90]
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="quick">
+
+    <h1 class="title">Quick Sort</h1>
+
+    <div class="materi-box">
+      <h2>Definisi :</h2>
+
+      <h2>1. Quick Sort</h2>
+
+      <p>
+        Quick Sort adalah algoritma pengurutan yang tahapannya terdiri dari proses divide dan combine. Berbeda dengan algoritma merge sort yang membagi data menjadi dua bagian tanpa syarat, pembagian data pada quick sort harus memenuhi ketentuan berdasarkan nilai pivot.
+      </p>
+
+      <h2>Cara Kerja:</h2>
+
+      <ul>
+        <li>Tahap Divide: Membagi data menjadi dua buah bagian berdasarkan nilai pivot.</li>
+        <li>Data yang berada di bagian sebelah kiri (bagian pertama) haruslah data-data yang memiliki nilai lebih kecil dari nilai pivot, meskipun urutannya masih acak.</li>
+        <li>Data yang berada di sebelah kanan (bagian kedua) adalah data-data yang memiliki nilai lebih besar dari nilai pivot.</li>
+        <li>Pada awal partisi, nilai pivot umumnya ditentukan dari data yang terdapat pada indeks awal dari sekumpulan data tersebut.</li>
+        <li>Dilakukan penelusuran data; jika ditemukan data yang nilainya kurang dari pivot, maka data tersebut ditukar posisinya dengan data di sebelah pivot.</li>
+        <li>Pada akhir partisi, pivot diletakkan di posisi indeks sebenarnya seolah-olah data tersebut sudah terurut.</li>
+        <li>Tahap Combine: Tahapan ini pada dasarnya hanya memerintahkan proses partisi secara berulang kali pada sub-bagian data.</li>
+        <li>Bagian data sebelum nilai pivot dan setelah nilai pivot akan dipartisi lagi menjadi dua bagian secara terus-menerus.</li>
+        <li>Proses ini berlanjut sampai tidak ada lagi data yang bisa dipartisi, sehingga hasil akhirnya seluruh data akan terurut.</li>
+      </ul>
+
+      <h2>Divide</h2>
+
+      <p>
+        Fungsi ini bertugas murni untuk menentukan pivot dan membagi data ke sisi kiri (lebih kecil) dan sisi kanan (lebih besar).
+      </p>
+
+      <pre>
+<code>
+# TAHAP 1: DIVIDE (Fungsi Partisi)
+def partition(A, p, q):
+    x = A[p]  # Menentukan pivot dari elemen pertama (indeks p)
+    i = p     # Menyimpan batas elemen yang lebih kecil dari pivot
+
+    # Menelusuri sisa data dari p+1 hingga q
+    for j in range(p + 1, q + 1):
+        # Jika elemen saat ini lebih kecil atau sama dengan pivot
+        if A[j] <= x:
+            i = i + 1
+            # Tukar elemen agar berpindah ke sisi kiri
+            A[i], A[j] = A[j], A[i]
+
+    # Tukar posisi pivot ke tengah-tengah batas
+    A[p], A[i] = A[i], A[p]
+    print(A)
+    # Kembalikan indeks posisi pivot yang baru
+    return i
+</code>
+      </pre>
+
+      <pre>
+<code>
+a=[37,83,10,1,45,25,12,90,54]
+partition(a,0,len(a)-1)
+print(a)
+
+[12, 10, 1, 25, 37, 83, 45, 90, 54]
+[12, 10, 1, 25, 37, 83, 45, 90, 54]
+</code>
+      </pre>
+
+      <h2>Combine</h2>
+
+      <p>
+        Fungsi ini bertugas untuk mengulang-ulang proses partisi di atas pada setiap potongan data sampai semuanya terurut sempurna. (Catatan: fungsi ini membutuhkan fungsi partition di atas agar bisa bekerja).
+      </p>
+
+      <pre>
+<code>
+# TAHAP 2: COMBINE (Fungsi Rekursif Quicksort)
+def Quicksort(A, p, q):
+    # Base case: Lakukan selama indeks awal (p) lebih kecil dari indeks akhir (q)
+    if p < q:
+        # Panggil tahap DIVIDE untuk memecah data dan mendapatkan indeks pivot (r)
+        r = partition(A, p, q)
+
+        # Panggil tahap COMBINE untuk mengurutkan bagian kiri pivot
+        Quicksort(A, p, r - 1)
+
+        # Panggil tahap COMBINE untuk mengurutkan bagian kanan pivot
+        Quicksort(A, r + 1, q)
+</code>
+      </pre>
+
+      <pre>
+<code>
+    data_acak = [37, 83, 10, 1, 45, 25, 12, 90, 54]
+    Quicksort(data_acak, 0, len(data_acak) - 1)
+
+[12, 10, 1, 25, 37, 83, 45, 90, 54]
+[1, 10, 12, 25, 37, 83, 45, 90, 54]
+[1, 10, 12, 25, 37, 83, 45, 90, 54]
+[1, 10, 12, 25, 37, 54, 45, 83, 90]
+[1, 10, 12, 25, 37, 45, 54, 83, 90]
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="search">
+
+    <h1 class="title">Searching</h1>
+
+    <div class="materi-box">
+      <h2>Definisi :¶</h2>
+
+      <h2>1. Unordered List Sequential Search¶</h2>
+
+      <p>
+        Unordered List Sequential Search adalah algoritma pencarian paling dasar yang memeriksa setiap elemen dalam daftar yang tidak terurut secara berurutan satu per satu. Karena datanya acak, algoritma ini harus memeriksa hingga elemen terakhir jika target tidak ditemukan.
+      </p>
+
+      <h2>Cara Kerja:¶</h2>
+
+      <ul>
+        <li>Memulai pencarian dari elemen pertama (indeks ke-0) di dalam daftar.</li>
+        <li>Membandingkan elemen yang sedang diperiksa saat ini dengan nilai target yang dicari (terget)</li>
+        <li>Jika elemen saat ini sama dengan target (Ist[i]==target), maka pencarian berhasil dan indeks dikembalikan.</li>
+        <li>Jika tidak sama, lanjut ke elemen berikutnya.</li>
+        <li>Proses ini terus dilakukan hingga target ditemukan atau pencarian mencapai batas akhir daftar (jika target tidak ada, semua elemen wajib diperiksa).</li>
+      </ul>
+
+      <pre>
+<code>
+# 1. Unordered List Sequential Search (Pencarian Tidak Terurut)
+def seqSearch(listData, data):
+    ind = 0
+    found = False
+
+    while ind < len(listData) and not found:
+        if listData[ind] == data:
+            found = True
+        else:
+            ind = ind + 1
+
+    return found  # Mengembalikan True jika ada, False jika tidak ada
+
+
+# 2. Ordered List Sequential Search (Pencarian Terurut)
+def orderedSeqSearch(listData, data):
+    ind = 0
+    found = False
+    stop = False
+    position = []
+
+    while ind < len(listData) and not found and not stop:
+        if listData[ind] == data:
+            found = True
+            position.append(ind)
+        else:
+            # Berhenti lebih awal jika elemen saat ini lebih besar dari data yang dicari
+            if listData[ind] > data:
+                stop = True
+            else:
+                ind = ind + 1
+
+    if found:
+        return ind  # Mengembalikan indeks dari data yang ditemukan
+    else:
+        return 'Data tidak ada'
+
+
+# ==========================================
+# CONTOH PENGGUNAAN
+# ==========================================
+if __name__ == "__main__":
+    # Pengujian Unordered Search
+    data_acak = [11, 23, 58, 31, 56, 77, 43, 12, 65, 19]
+    print("--- seqSearch (Unordered) ---")
+    print("Apakah 31 ada di data acak? :", seqSearch(data_acak, 31))
+    print("Apakah 99 ada di data acak? :", seqSearch(data_acak, 99))
+
+    # Pengujian Ordered Search
+    data_terurut = [11, 12, 19, 23, 31, 43, 56, 58, 65, 77]
+    print("\n--- orderedSeqSearch (Ordered) ---")
+    print("Mencari 56 di data terurut  : Indeks ke-", orderedSeqSearch(data_terurut, 56))
+    print("Mencari 50 di data terurut  :", orderedSeqSearch(data_terurut, 50))
+</code>
+      </pre>
+
+      <h2>Definisi :¶</h2>
+
+      <h2>2. Ordered List Sequential Search¶</h2>
+
+      <p>
+        Ordered List Sequential Search adalah algoritma pencarian sekuensial yang diterapkan pada daftar yang sudah terurut (misalnya, dari kecil ke besar). Keuntungannya adalah pencarian dapat dihentikan lebih awal jika algoritma menemukan elemen yang nilainya lebih besar dari target, karena elemen di sebelahnya pasti akan lebih besar lagi.
+      </p>
+
+      <h2>Cara Kerja:¶</h2>
+
+      <ul>
+        <li>Memulai pencarian dari elemen pertama (indeks ke-0) di dalam daftar.</li>
+        <li>Membandingkan elemen yang sedang diperiksa dengan nilai target (target)</li>
+        <li>Jika elemen saat ini sama dengan target (Ist[i]==target), pencarian berhasil dan indeks dikembalikan.</li>
+        <li>Jika elemen saat ini lebih besar dari target (Ist[i]>target), maka pencarian langsung dihentikan karena tidak mungkin target berada di sisa daftar tersebut.</li>
+        <li>Jika elemen saat ini masih lebih kecil dari target, lanjut ke elemen berikutnya hingga mencapai akhir daftar.</li>
+      </ul>
+
+      <pre>
+<code>
+def ordered_sequential_search(arr, target):
+    # Telusuri setiap elemen dari awal
+    for i in range(len(arr)):
+        # Jika target ditemukan, kembalikan indeksnya
+        if arr[i] == target:
+            return i
+        # BERHENTI LEBIH AWAL: Jika elemen saat ini lebih besar dari target
+        elif arr[i] > target:
+            print(f"Pencarian dihentikan lebih awal di indeks {i} karena {arr[i]} > {target}")
+            break # Hentikan loop karena data setelahnya pasti lebih besar
+
+    # Jika tidak ditemukan (atau loop dihentikan lebih awal), kembalikan -1
+    return -1
+
+# Contoh Penggunaan
+# DATA HARUS DIURUTKAN TERLEBIH DAHULU (Ascending)
+data_terurut = [17, 20, 26, 31, 44, 54, 55, 77, 93]
+angka_dicari = 50 # Angka 50 tidak ada dalam daftar
+
+hasil = ordered_sequential_search(data_terurut, angka_dicari)
+if hasil != -1:
+    print(f"Target {angka_dicari} ditemukan pada indeks ke-{hasil}")
+else:
+    print(f"Target {angka_dicari} tidak ditemukan di dalam daftar.")
+
+Pencarian dihentikan lebih awal di indeks 5 karena 54 > 50
+Target 50 tidak ditemukan di dalam daftar.
+</code>
+      </pre>
+
+      <h2>Latihan soal</h2>
+
+      <pre>
+<code>
+def Search(data, cari) :
+    urut = True
+    for i in range(len(data)-1) :
+        for j in range(i,len(data)) :
+            if data[i] > data[j] :
+                urut = False
+    print(f'Data : {data} \nKey yang dicari : {cari}')
+    if not urut :
+        print(f'\nStatus Data : Tidak terurut \nAlgoritma yang digunakan : Sequantial Search')
+
+        return sequentialSearch(data,cari)
+    else :
+        print(f'\nStatus Data : Terurut \nAlgoritma yang digunakan : Binary Search')
+        return binSearch(data,cari)
+
+def sequentialSearch(data, cari):
+    ind = 0
+    found = False
+    while ind< not found :
+        if cari == data[ind]:
+            found = True
+        else :
+            ind += 1
+    if found :
+        print(f"\nHasil :\nData ditemukan pada index ke-{ind} \nJumlah Iterasi : {ind+1}")
+    else :
+        print("Data tidak Ditemukan")
+
+def binSearch(data,cari) :
+    awal = 0
+    akhir = len(data)-1
+    found = False
+    iterasi = 1
+
+    while awal <= akhir and not found :
+        tengah = awal + akhir // 2
+        if data[tengah] == cari :
+            found = True
+        else :
+            if cari < data[tengah] :
+                akhir = tengah - 1
+                iterasi += 1
+            else :
+                awal = tengah - 1
+                iterasi += 1
+    if found :
+        print(f"\nHasil :\nData ditemukan pada index ke-{tengah} \nJumlah Iterasi : {iterasi}")
+    else :
+        print("Data tidak Ditemukan")
+
+data1 = [3,6,2,7,4,12,40]
+Search(data1,4)
+print("=="*30)
+data2 = [3,6,7,9,12,15,70]
+Search(data2,12)
+
+Data : [3, 6, 2, 7, 4, 12, 40]
+Key yang dicari : 4
+
+Status Data : Tidak terurut
+Algoritma yang digunakan : Sequantial Search
+
+Hasil :
+Data ditemukan pada index ke-4
+Jumlah Iterasi : 5
+============================================================
+Data : [3, 6, 7, 9, 12, 15, 70]
+Key yang dicari : 12
+
+Status Data : Terurut
+Algoritma yang digunakan : Binary Search
+
+Hasil :
+Data ditemukan pada index ke-4
+Jumlah Iterasi : 3
+</code>
+      </pre>
+
+      <pre>
+<code>
+def Search(data, cari):
+    urut = True
+    for i in range(len(data)-1):
+        for j in range(i, len(data)):
+            if data[i] > data[j]:
+                urut = False
+
+    print(f'Data : {data} \nKey yang dicari : {cari}')
+    if not urut:
+        print(f'\nStatus Data : Tidak terurut \nAlgoritma yang digunakan : Sequential Search')
+        return sequentialSearch(data, cari)
+    else:
+        print(f'\nStatus Data : Terurut \nAlgoritma yang digunakan : Binary Search')
+        return binSearch(data, cari)
+
+
+def sequentialSearch(data, cari):
+    ind = 0
+    found = False
+
+    while ind < len(data) and not found:
+        if cari == data[ind]:
+            found = True
+        else:
+            ind += 1
+
+    if found:
+        print(f"\nHasil :\nData ditemukan pada index ke-{ind} \nJumlah Iterasi : {ind+1}")
+    else:
+        print("\nHasil :\nData tidak ditemukan")
+
+
+        min_jarak = data[0] - cari
+        if min_jarak < 0:
+            min_jarak = -min_jarak
+
+        Dekat = []
+
+        for item in data:
+            jarak = item - cari
+            if jarak < 0:
+                jarak = -jarak
+
+            if jarak < min_jarak:
+                min_jarak = jarak
+                Dekat = [item]
+            elif jarak == min_jarak and item not in Dekat:
+                Dekat.append(item)
+
+        if len(Dekat) == 1:
+            print(f"Nilai terdekat: {Dekat[0]}")
+        elif len(Dekat) == 2:
+            if Dekat[0] > Dekat[1]:
+                print(f"Nilai terdekat: {Dekat[1]} dan {Dekat[0]}")
+            else:
+                print(f"Nilai terdekat: {Dekat[0]} dan {Dekat[1]}")
+
+
+def binSearch(data, cari):
+    awal = 0
+    akhir = len(data) - 1
+    found = False
+    iterasi = 1
+
+    while awal <= akhir and not found:
+        tengah = (awal + akhir) // 2
+        if data[tengah] == cari:
+            found = True
+        else:
+            if cari < data[tengah]:
+                akhir = tengah - 1
+            else:
+                awal = tengah + 1
+
+            if not found:
+                iterasi += 1
+
+    if found:
+        print(f"\nHasil :\nData ditemukan pada index ke-{tengah} \nJumlah Iterasi : {iterasi}")
+    else:
+        print("\nHasil :\nData tidak ditemukan")
+
+        if akhir < 0:
+            Dekat = [data[awal]]
+        elif awal >= len(data):
+            Dekat = [data[akhir]]
+        else:
+            jarak1 = data[akhir] - cari
+            if jarak1 < 0:
+                jarak1 = -jarak1
+
+            jarak2 = data[awal] - cari
+            if jarak2 < 0:
+                jarak2 = -jarak2
+
+            if jarak1 < jarak2:
+                Dekat = [data[akhir]]
+            elif jarak2 < jarak1:
+                Dekat = [data[awal]]
+            else:
+                Dekat = [data[akhir], data[awal]]
+
+        if len(Dekat) == 1:
+            print(f"Nilai terdekat: {Dekat[0]}")
+        elif len(Dekat) == 2:
+            print(f"Nilai terdekat: {Dekat[0]} dan {Dekat[1]}")
+
+
+data_soal = [10, 20, 30, 41, 50]
+Search(data_soal, 35)
+
+print("\n" + "=="*30 + "\n")
+
+data_acak = [3,6,2,7,4,12,40]
+Search(data_acak, 5)
+
+Data : [10, 20, 30, 41, 50]
+Key yang dicari : 35
+
+Status Data : Terurut
+Algoritma yang digunakan : Binary Search
+
+Hasil :
+Data tidak ditemukan
+Nilai terdekat: 30
+
+============================================================
+
+Data : [3, 6, 2, 7, 4, 12, 40]
+Key yang dicari : 5
+
+Status Data : Tidak terurut
+Algoritma yang digunakan : Sequential Search
+
+Hasil :
+Data tidak ditemukan
+Nilai terdekat: 4 dan 6
+</code>
+      </pre>
+
+      <pre>
+<code>
+def searchRange(data,lower,upper):
+    linearRange(data, lower, upper)
+    binarySearch(data,lower,upper)
+
+def linearRange(data, lower, upper):
+    print("HASIL LINEAR SEARCH (Unordered)")
+    hasil = []
+    iterasi = 0
+
+    for i in range(len(data)):
+        iterasi += 1
+        if lower <= data[i] <= upper:
+            hasil.append(data[i])
+
+    print(f"Data dalam range: {hasil}")
+    print(f"Jumlah iterasi: {iterasi}\n")
+
+
+def binarySearch(data, lower, upper):
+    print("HASIL BINARY SEARCH")
+
+    arr = data[:]
+    for i in range(len(arr)):
+        for j in range(len(arr) - 1 - i):
+            if arr[j] > arr[j + 1]:
+                temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+
+    print(f"Data terurut: {arr}")
+
+    awal = 0
+    akhir = len(arr) - 1
+    mid = -1
+    iterasi = 0
+
+    while awal <= akhir:
+        iterasi += 1
+        tengah = (awal + akhir) // 2
+
+        if arr[tengah] >= lower and arr[tengah] <= upper:
+            mid = tengah
+            break
+        # elif arr[tengah] < lower:
+        #     awal = tengah + 1
+        # else:
+        #     akhir = tengah - 1
+
+    hasil = []
+
+    if mid != -1:
+        kiri = mid - 1
+        while kiri >= 0:
+            iterasi += 1
+            if arr[kiri] >= lower:
+                hasil = [arr[kiri]] + hasil
+                kiri -= 1
+            else:
+                break
+
+        hasil.append(arr[mid])
+
+        kanan = mid + 1
+        while kanan < len(arr):
+            iterasi += 1
+            if arr[kanan] <= upper:
+                hasil.append(arr[kanan])
+                kanan += 1
+            else:
+                break
+
+    print(f"Data dalam range: {hasil}")
+    print(f"Jumlah iterasi: {iterasi}")
+
+data = [5, 1, 8, 12, 3, 20, 15]
+lower = 8
+upper = 15
+
+print(f"Data Asli: {data}")
+print(f"Range: {lower} s.d {upper}\n")
+searchRange(data,lower,upper)
+
+Data Asli: [5, 1, 8, 12, 3, 20, 15]
+Range: 8 s.d 15
+
+HASIL LINEAR SEARCH (Unordered)
+Data dalam range: [8, 12, 15]
+Jumlah iterasi: 7
+
+HASIL BINARY SEARCH
+Data terurut: [1, 3, 5, 8, 12, 15, 20]
+Data dalam range: [8, 12, 15]
+Jumlah iterasi: 5
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="rekursif">
+
+    <h1 class="title">Rekursif</h1>
+
+    <div class="materi-box">
+      <h2>Definisi :</h2>
+
+      <h2>1. Rekursif</h2>
+
+      <p>
+        Rekursif adalah teknik pemrograman atau pendekatan algoritma di mana sebuah fungsi memanggil dirinya sendiri secara berulang untuk menyelesaikan suatu masalah. Teknik ini bekerja dengan cara memecah masalah yang kompleks menjadi sub-masalah yang lebih kecil dan serupa hingga mencapai kondisi paling sederhana yang dapat langsung diselesaikan.
+      </p>
+
+      <h2>Cara Kerja Umum:</h2>
+
+      <ul>
+        <li>Menentukan Base Case (Kasus Dasar): Ini adalah kondisi berhenti atau titik akhir di mana fungsi tidak lagi memanggil dirinya sendiri, sehingga mencegah terjadinya perulangan tak terbatas (infinite loop).</li>
+        <li>Menentukan Recursive Case (Kasus Rekursif): Bagian di mana fungsi memanggil dirinya sendiri dengan argumen atau nilai masukan yang dimodifikasi, sehingga secara bertahap kondisinya semakin mendekati Base Case.</li>
+        <li>Setiap kali fungsi memanggil dirinya sendiri, status eksekusi saat itu akan ditunda dan disimpan di dalam tumpukan memori komputer (call stack).</li>
+        <li>Begitu Base Case terpenuhi, fungsi berhenti memanggil dirinya sendiri dan mulai mengembalikan hasil eksekusi dari tumpukan memori secara mundur hingga mencapai pemanggilan fungsi yang pertama kali.</li>
+      </ul>
+
+      <h2>Implementasi 1: Faktorial</h2>
+
+      <ul>
+        <li>Faktorial adalah operasi matematika yang mengalikan sebuah bilangan bulat positif dengan semua bilangan bulat positif di bawahnya (contoh: 5!=5x4x3x2x1).</li>
+        <li>Base Case: Jika nilai n=0 atau n=1, maka fungsi mengembalikan nilai 1.</li>
+        <li>Recursive Case: Jika n>1, maka fungsi mengembalikan nilai N x faktorial(n-1).</li>
+        <li>Fungsi akan terus memanggil dirinya sendiri untuk mengalikan angka saat ini dengan angka yang lebih kecil hingga mencapai angka 1, lalu hasil akhirnya dihitung secara mundur.</li>
+      </ul>
+
+      <h2>CODE</h2>
+
+      <pre>
+<code>
+def faktorial(n):
+    # Base Case: jika n adalah 0 atau 1
+    if n == 0 or n == 1:
+        return 1
+    # Recursive Case: n dikali faktorial dari n-1
+    else:
+        return n * faktorial(n-1)
+
+# Contoh Penggunaan
+angka = 5
+print(f"Hasil Faktorial dari {angka}! :", faktorial(angka))
+
+Hasil Faktorial dari 5! : 120
+</code>
+      </pre>
+
+      <h2>Implementasi 2: Menara Hanoi (Tower of Hanoi)</h2>
+
+      <ul>
+        <li>Menara Hanoi adalah permainan teka-teki matematis dengan tujuan memindahkan tumpukan cakram dari tiang asal ke tiang tujuan, dengan syarat cakram yang lebih besar tidak boleh diletakkan di atas cakram yang lebih kecil.</li>
+        <li>Base Case: Jika hanya ada 1 cakram (n=1), langsung pindahkan cakram tersebut dari tiang asal ke tiang tujuan.</li>
+        <li>Recursive Case: Untuk memindahkan n  cakram, logika pemecahannya dibagi menjadi tiga pemanggilan berulang:
+
+            1. Pindahkan n-1 cakram bagian atas dari tiang asal ke tiang bantuan (menggunakan tiang tujuan sebagai perantara).
+            2. Pindahkan 1 cakram terbesar (yang tersisa di paling bawah) dari tiang asal langsung ke tiang tujuan.
+            3. Pindahkan kembali n-1 cakram dari tiang bantuan ke tiang tujuan (menggunakan tiang asal sebagai perantara).</li>
+      </ul>
+
+      <h2>CODE</h2>
+
+      <pre>
+<code>
+def menara_hanoi(n, asal, tujuan, bantuan):
+    # Base Case: jika hanya ada 1 cakram, langsung pindahkan
+    if n == 1:
+        print(f"Pindahkan cakram 1 dari tiang {asal} ke tiang {tujuan}")
+        return
+
+    # Recursive Case:
+    # 1. Pindahkan n-1 cakram dari asal ke bantuan
+    menara_hanoi(n-1, asal, bantuan, tujuan)
+
+    # 2. Pindahkan cakram terbesar (n) dari asal ke tujuan
+    print(f"Pindahkan cakram {n} dari tiang {asal} ke tiang {tujuan}")
+
+    # 3. Pindahkan n-1 cakram dari bantuan ke tujuan
+    menara_hanoi(n-1, bantuan, tujuan, asal)
+
+# Contoh Penggunaan
+jumlah_cakram = 3
+print(f"Langkah-langkah memindahkan {jumlah_cakram} cakram:")
+menara_hanoi(jumlah_cakram, 'A', 'C', 'B')
+
+Langkah-langkah memindahkan 3 cakram:
+Pindahkan cakram 1 dari tiang A ke tiang C
+Pindahkan cakram 2 dari tiang A ke tiang B
+Pindahkan cakram 1 dari tiang C ke tiang B
+Pindahkan cakram 3 dari tiang A ke tiang C
+Pindahkan cakram 1 dari tiang B ke tiang A
+Pindahkan cakram 2 dari tiang B ke tiang C
+Pindahkan cakram 1 dari tiang A ke tiang C
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="parsing">
+
+    <h1 class="title">Parsing Tree</h1>
+
+    <div class="materi-box">
+      <h2>EDefinisi :</h2>
+
+      <h2>1. Aplikasi Binary Tree: Parsing Ekspresi Matematika</h2>
+
+      <p>
+        Struktur data Binary Tree dapat diimplementasikan untuk berbagai aplikasi, salah satunya yang paling umum adalah penyelesaian persamaan matematika.
+      </p>
+
+      <ul>
+        <li>Hirarki Operasi: Penyelesaian matematika sangat bergantung pada derajat operator (operator precedence) dan tanda kurung. Operasi di dalam kurung harus diselesaikan terlebih dahulu meskipun derajat operatornya lebih rendah. Binary tree dapat memodelkan hirarki ini di mana left subtree dan right subtree akan dieksekusi terlebih dahulu sebelum dikembalikan ke parent-nya.</li>
+        <li>Tahapan Utama: Proses ini terbagi menjadi dua tahap utama: 1) Pembentukan Parse Tree, dan 2) Evaluasi Persamaan Matematika.</li>
+      </ul>
+
+      <h2>Aturan Pembentukan Parse Tree:</h2>
+
+      <p>
+        Persamaan matematika pertama-tama harus dipecah menjadi kumpulan token, yaitu kurung buka, kurung tutup, operand (angka), dan operator. Algoritma penyusunannya adalah sebagai berikut:
+      </p>
+
+      <ul>
+        <li>Jika token adalah ( : Tambahkan sebuah node baru kosong sebagai left child dari current node, kemudian pindahkan posisi current node ke node left child yang baru dibuat tersebut.</li>
+        <li>Jika token adalah Operator (+, -, *, /) : Set nilai key dari current node dengan simbol operator tersebut. Setelah itu, buat node baru sebagai right child, lalu pindahkan current node ke posisi right child tersebut.</li>
+        <li>Jika token adalah Operand (Angka) : Ubah nilai key dari current node menjadi angka tersebut. Setelah angkanya masuk, kembalikan posisi current node ke parent-nya.</li>
+        <li>Jika token adalah ) : Proses untuk cabang tersebut selesai, sehingga posisi current node cukup dikembalikan ke parent-nya.</li>
+      </ul>
+
+      <h2>Peran Stack:</h2>
+
+      <p>
+        Untuk menjalankan algoritma di atas, program butuh kembali ke parent node. Karena struktur class Binary Tree biasa tidak menyimpan alamat parent, maka dibutuhkan struktur data tambahan yaitu Stack. Setiap kali turun ke child, parent akan di-push ke Stack, dan saat perlu kembali ke atas, parent akan di-pop dari Stack.
+      </p>
+
+      <pre>
+<code>
+# IMPLEMENTASI CODE: STACK & BUILD PARSE TREE
+
+# 1. Fungsi Bantuan Stack
+def stack():
+    return []
+
+def push(s, data):
+    s.append(data)
+
+def pop(s):
+    data = s.pop()
+    return data
+
+def peek(s):
+    return s[len(s)-1]
+
+def isEmpty(s):
+    return s == []
+
+def size(s):
+    return len(s)
+
+# Catatan: Class BinaryTree diasumsikan sudah ada dari file sebelumnya 
+# (memiliki method insertLeft, insertRight, getLeftChild, getRightChild, setRootVal)
+
+# 2. Fungsi Pembentuk Parse Tree
+def buildParseTree(mathExp):
+    # Memecah persamaan menjadi list token berdasarkan spasi
+    tokenList = mathExp.split()
+    parentStack = stack()
+    expTree = BinaryTree('')
+
+    push(parentStack, expTree)
+    currentTree = expTree
+
+    for i in tokenList:
+        if i == '(':
+            currentTree.insertLeft('')
+            push(parentStack, currentTree)
+            currentTree = currentTree.getLeftChild()
+
+        elif i not in ['+', '-', '*', '/', ')']:
+            # Token berupa Operand (Angka)
+            currentTree.setRootVal(int(i))
+            parent = pop(parentStack)
+            currentTree = parent
+
+        elif i in ['+', '-', '*', '/']:
+            # Token berupa Operator
+            currentTree.setRootVal(i)
+            currentTree.insertRight('')
+            push(parentStack, currentTree)
+            currentTree = currentTree.getRightChild()
+
+        elif i == ')':
+            currentTree = pop(parentStack)
+
+        else:
+            raise ValueError
+
+    return expTree
+</code>
+      </pre>
+
+      <h2>Definisi :</h2>
+
+      <h2>2. Evaluasi Persamaan Matematika</h2>
+
+      <p>
+        Setelah parse tree berhasil dibentuk, tahap selanjutnya adalah menyelesaikan (mengevaluasi) nilai dari persamaan matematika tersebut.
+      </p>
+
+      <ul>
+        <li>Penyelesaian Rekursif: Untuk menyelesaikan persamaan matematika menggunakan binary tree, diperlukan penyelesaian secara rekursif terhadap subtree dari binary tree tersebut. Rekursif dilakukan dengan mengoperasikan left child dan right child dengan operator yang sesuai, lalu hasilnya digunakan sebagai nilai balik untuk level di atasnya.</li>
+        <li>Base Case: Kondisi berhenti (base case) untuk fungsi rekursif ini adalah pada saat pointer berada di leaf node. Karena leaf node tidak memiliki child lagi dan hanya berisi informasi operand, maka nilai balik fungsi rekursifnya adalah informasi node itu sendiri (key).</li>
+        <li>Modul Operator: Untuk mengeksekusi operasi aritmatika string seperti '+', '-', '*', dan '/', digunakan modul bawaan Python yaitu modul operator (misal: operator.add(x, y)).</li>
+      </ul>
+
+      <pre>
+<code>
+# IMPLEMENTASI CODE: FUNGSI EVALUASI TREE
+import operator
+
+def evaluate(parse_tree):
+    # Mapping simbol ke fungsi matematika dari modul operator
+    opers = {
+        '+': operator.add,
+        '-': operator.sub,
+        '*': operator.mul,
+        '/': operator.truediv
+    }
+
+    # Ambil anak kiri dan kanan
+    left = parse_tree.getLeftChild()
+    right = parse_tree.getRightChild()
+
+    # Jika memiliki anak kiri dan kanan (artinya node adalah Operator)
+    if left and right:
+        fn = opers[parse_tree.getRootVal()]
+        # Lakukan pemanggilan rekursif ke level bawahnya
+        return fn(evaluate(left), evaluate(right))
+
+    # BASE CASE: Jika berada di leaf node (artinya node adalah Operand)
+    else:
+        return parse_tree.getRootVal()
+
+# ==========================================
+# CONTOH PENGGUNAAN
+# ==========================================
+if __name__ == "__main__":
+    # Penting: Persamaan harus dipisah menggunakan spasi
+    persamaan = "( 3 + ( 4 * 5 ) )"
+
+    # 1. Bentuk Parse Tree
+    pt = buildParseTree(persamaan)
+
+    # 2. Hitung hasil evaluasi
+    hasil = evaluate(pt)
+
+    print("Persamaan Awal :", persamaan)
+    print("Hasil Evaluasi :", hasil)
+
+Persamaan Awal : ( 3 + ( 4 * 5 ) )
+Hasil Evaluasi : 23
+</code>
+      </pre>
+
+    </div>
+
+  </section>
+
+  <section id="tugas1">
+
+    <h1 class="title">Tugas</h1>
+
+    <div class="materi-box">
+
+      <pre>
+<code>
+def remainderFunction(data, size):
+    return data % size
+
+def midSquareFunction(data, size):
+    square = data ** 2
+    s = str(square)
+    mid = len(s) // 2
+
+    if len(s) == 1:
+        middle = s
+    else:
+        middle = s[max(0, mid-1):mid+1]
+
+    return int(middle) % size
+
+
+# CHAINING (CLOSE ADDRESSING)
+
+def createChainTable(size):
+    tabel = []
+    for i in range(size):
+        tabel.append([])
+    return tabel
+
+def insertChain(tabel, data, metode):
+    index = metode(data, len(tabel))
+    tabel[index].append(data)
+
+def searchChain(tabel, data, metode):
+    index = metode(data, len(tabel))
+    if data in tabel[index]:
+        return True
+    return False
+
+def deleteChain(tabel, data, metode):
+    index = metode(data, len(tabel))
+    if data in tabel[index]:
+        tabel[index].remove(data)
+
+def updateChain(tabel, old, new, metode):
+    deleteChain(tabel, old, metode)
+    insertChain(tabel, new, metode)
+
+
+# LINEAR PROBING
+
+def createTable(size):
+    tabel = []
+    for i in range(size):
+        tabel.append(None)
+    return tabel
+
+def insertLinear(tabel, data, metode):
+    index = metode(data, len(tabel))
+    start = index
+
+    while tabel[index] is not None:
+        index = (index + 1) % len(tabel)
+        if index == start:
+            print("Table penuh!")
+            return
+
+    tabel[index] = data
+
+def searchLinear(tabel, data, metode):
+    index = metode(data, len(tabel))
+    start = index
+
+    while tabel[index] is not None:
+        if tabel[index] == data:
+            return True
+        index = (index + 1) % len(tabel)
+        if index == start:
+            break
+    return False
+
+def deleteLinear(tabel, data, metode):
+    index = metode(data, len(tabel))
+    start = index
+
+    while tabel[index] is not None:
+        if tabel[index] == data:
+            tabel[index] = None
+            return
+        index = (index + 1) % len(tabel)
+        if index == start:
+            break
+
+def updateLinear(tabel, old, new, metode):
+    deleteLinear(tabel, old, metode)
+    insertLinear(tabel, new, metode)
+
+
+# QUADRATIC
+
+def insertQuadratic(tabel, data, metode):
+    index = metode(data, len(tabel))
+    i = 1
+
+    while tabel[index] is not None:
+        index = (index + i*i) % len(tabel)
+        i += 1
+        if i == len(tabel):
+            print("Table penuh!")
+            return
+
+    tabel[index] = data
+
+def searchQuadratic(tabel, data, metode):
+    index = metode(data, len(tabel))
+    i = 1
+
+    while tabel[index] is not None:
+        if tabel[index] == data:
+            return True
+        index = (index + i*i) % len(tabel)
+        i += 1
+        if i == len(tabel):
+            break
+    return False
+
+def deleteQuadratic(tabel, data, metode):
+    index = metode(data, len(tabel))
+    i = 1
+
+    while tabel[index] is not None:
+        if tabel[index] == data:
+            tabel[index] = None
+            return
+        index = (index + i*i) % len(tabel)
+        i += 1
+        if i == len(tabel):
+            break
+
+def updateQuadratic(tabel, old, new, metode):
+    deleteQuadratic(tabel, old, metode)
+    insertQuadratic(tabel, new, metode)
+</code>
+      </pre>
+
+      <pre>
+<code>
+    print("=== REMAINDER ===")
+
+data = [10, 20, 30, 40, 50, 60]
+
+print("=== CHAINING ===")
+chain = createChainTable(5)
+
+for d in data:
+    insertChain(chain, d, remainderFunction)
+
+print("Table:", chain)
+print("Cari 20:", searchChain(chain, 20, remainderFunction))
+deleteChain(chain, 20, remainderFunction)
+print("Setelah delete 20:", chain)
+updateChain(chain, 30, 99, remainderFunction)
+print("Setelah update 30->99:", chain)
+
+
+print("\n=== LINEAR PROBING ===")
+linear = createTable(5)
+
+for d in data:
+    insertLinear(linear, d, remainderFunction)
+
+print("Table:", linear)
+print("Cari 20:", searchLinear(linear, 20, remainderFunction))
+deleteLinear(linear, 20, remainderFunction)
+print("Setelah delete 20:", linear)
+updateLinear(linear, 20, 77, remainderFunction)
+print("Setelah update 20->77:", linear)
+
+
+print("\n=== QUADRATIC PROBING ===")
+quad = createTable(5)
+
+for d in data:
+    insertQuadratic(quad, d, remainderFunction)
+
+print("Table:", quad)
+print("Cari 20:", searchQuadratic(quad, 20, remainderFunction))
+deleteQuadratic(quad, 20, remainderFunction)
+print("Setelah delete :", quad)
+updateQuadratic(quad, 20, 88, remainderFunction)
+print("Setelah update 20->88:", quad)
+</code>
+
+    <p>
+=== REMAINDER ===
+=== CHAINING ===
+Table: [[10, 20, 30, 40, 50, 60], [], [], [], []]
+Cari 20: True
+Setelah delete 20: [[10, 30, 40, 50, 60], [], [], [], []]
+Setelah update 30->99: [[10, 40, 50, 60], [], [], [], [99]]
+
+=== LINEAR PROBING ===
+Table penuh!
+Table: [10, 20, 30, 40, 50]
+Cari 20: True
+Setelah delete 20: [10, None, 30, 40, 50]
+Setelah update 20->77: [10, 77, 30, 40, 50]
+
+=== QUADRATIC PROBING ===
+Table penuh!
+Table penuh!
+Table penuh!
+Table: [10, 20, None, None, 30]
+Cari 20: True
+Setelah delete : [10, None, None, None, 30]
+Setelah update 20->88: [10, None, None, 88, 30]
+    </p>
+      </pre>
+
+      <pre>
+<code>
+print("=== MID SQUARE ===")
+
+data = [10, 20, 30, 40, 50, 60]
+
+print("=== CHAINING ===")
+chain = createChainTable(5)
+
+for d in data:
+    insertChain(chain, d, midSquareFunction)
+
+print("Table:", chain)
+print("Cari 20:", searchChain(chain, 20, midSquareFunction))
+deleteChain(chain, 20, midSquareFunction)
+print("Setelah delete 20:", chain)
+updateChain(chain, 35, 99, midSquareFunction)
+print("Setelah update 35->99:", chain)
+
+
+print("\n=== LINEAR PROBING ===")
+linear = createTable(5)
+
+for d in data:
+    insertLinear(linear, d, midSquareFunction)
+
+print("Table:", linear)
+print("Cari 20:", searchLinear(linear, 20, midSquareFunction))
+deleteLinear(linear, 20, midSquareFunction)
+print("Setelah delete 20:", linear)
+updateLinear(linear, 20, 77, midSquareFunction)
+print("Setelah update 20->77:", linear)
+
+
+print("\n=== QUADRATIC PROBING ===")
+quad = createTable(5)
+
+for d in data:
+    insertQuadratic(quad, d, midSquareFunction)
+
+print("Table:", quad)
+print("Cari 15:", searchQuadratic(quad, 20, midSquareFunction))
+deleteQuadratic(quad, 20, midSquareFunction)
+print("Setelah delete 20:", quad)
+updateQuadratic(quad, 20, 88, midSquareFunction)
+print("Setelah update 20->88:", quad)
+</code>
+
+<p>
+=== MID SQUARE ===
+=== CHAINING ===
+Table: [[10, 20, 30, 40, 50, 60], [], [], [], []]
+Cari 20: True
+Setelah delete 20: [[10, 30, 40, 50, 60], [], [], [], []]
+Setelah update 35->99: [[10, 30, 40, 50, 60, 99], [], [], [], []]
+
+=== LINEAR PROBING ===
+Table penuh!
+Table: [10, 20, 30, 40, 50]
+Cari 20: True
+Setelah delete 20: [10, None, 30, 40, 50]
+Setelah update 20->77: [10, 77, 30, 40, 50]
+
+=== QUADRATIC PROBING ===
+Table penuh!
+Table penuh!
+Table penuh!
+Table: [10, 20, None, None, 30]
+Cari 15: True
+Setelah delete 20: [10, None, None, None, 30]
+Setelah update 20->88: [10, None, None, 88, 30]
+</p>
+      </pre>
+
+    </div>
+
+  </section>
+
+</footer>
+
+</div>
+
+<script>
+
+  const cards = document.querySelectorAll('.card');
+
+  cards.forEach(card => {
+
+    card.addEventListener('mouseenter', () => {
+      card.style.transform = 'translateY(-10px)';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'translateY(0px)';
+    });
+
+  });
+
+</script>
+
+</body>
+</html>
